@@ -106,3 +106,43 @@ user-select: none; /* Standard */
      2px  2px 0 #000000;
 
 }
+
+.custom_rotate{
+  rotate: 30deg;
+}
+.reverse_custom_rotate{
+  rotate: -30deg;
+}
+
+
+.stop{
+  width:80px;
+  height:80px;
+  border:10px solid rgb(220 38 38);
+  border-radius:50%;
+  position:relative;
+  box-shadow:
+  2px 2px #000,
+   1px  1px 0 #000000,
+  -1px -1px 0 #000000,
+  -1px  1px 0 #000000,
+   1px -1px 0 #000000,
+   1px  0   0 #000000,
+  -1px  0   0 #000000,
+   0   -1px 0 #000000,
+   0    1px 0 #000000,
+   1px  1px 0 #000000;
+   z-index: 100;
+}
+
+.stop:after{
+  z-index: -10;
+  content:'';
+  display:block;
+  position:absolute;
+  width:10px;
+  height:70px;
+  background:rgb(220 38 38);
+  left:calc(50% - 7px);
+  transform:rotatez(45deg);
+}
