@@ -29,16 +29,77 @@
 
 
 
-	<!-- +4 card -->
+
 	<div class='bg-white p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center bg-black '}>
+		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center bg-red-600 '}>
 			<div class="w-full flex items-start justify-start h-6 pl-1">
 				<div class='text-[20px] text-white font-extrabold the_secondary_number h-6 flex items-start justify-cenetr'>
 					+4
 				</div>
 			</div>
-			<div class='bg-white w-full h-3/4  rounded-tr-[60px] rounded-tl-[160px] rounded-br-[160px] rounded-bl-[60px] flex items-center justify-center overflow-hidden'>
-				<div class="relative  w-full h-full bg-red-600 ">
+			<div class='bg-white w-full h-3/4  rounded-tr-[60px] rounded-tl-[160px] rounded-br-[160px] rounded-bl-[60px] flex items-center justify-center'>
+				<div class="h-full w-full relative bg-green-600">
+					<div class='absolute bg-white w-20 h-20  rounded-full top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] p-4 block'>
+						<div class='bg-green-600 h-full w-full rounded-full block_inside' ></div>
+						<div class='bg-white h-14 w-4 top-0 left-0   translate-x-[100%] -translate-y-[90%] -rotate-45 bar'></div>
+						<div class='bg-white h-14 w-4 top-0 left-0   translate-x-[100%] -translate-y-[90%] -rotate-45 '></div>
+					</div>
+				</div>
+			</div>
+			<div class="w-full flex items-start justify-end h-6 pr-1">
+				<div class='text-[20px] text-white font-extrabold the_secondary_number h-6 flex items-start justify-cenetr rotate-180'>
+					+4
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- +4 card -->
+	<div class='bg-white p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
+		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center bg-black '}>
+			<div class="w-full flex items-start justify-start h-6 pl-1">
+				<div class='text-[20px] text-white font-extrabold the_secondary_number h-6 flex items-end justify-cenetr'>
+					<div class='border   border-white w-full h-3/4  rounded-tr-[60px] rounded-tl-[160px] rounded-br-[160px] rounded-bl-[60px] flex items-center justify-center overflow-hidden'>
+						<div class="relative  w-4 h-6 bg-red-600 rotate-45 ">
+							<div class="absolute w-1/2 h-1/2 top-0 right-0 bg-green-600"></div>
+							<div class="absolute w-1/2 h-1/2 bottom-0 left-0 bg-red-600"></div>
+							<div class="absolute w-1/2 h-1/2 bottom-0 right-0 bg-yellow-400"></div>
+							<div class="absolute w-1/2 h-1/2 top-0 left-0 bg-blue-600"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class='border-4 border-white w-full h-3/4  rounded-tr-[60px] rounded-tl-[160px] rounded-br-[160px] rounded-bl-[60px] flex items-center justify-center overflow-hidden'>
+				<div class="relative  w-48 h-48 bg-red-600 rotate-45 ">
 					<div class="absolute w-1/2 h-1/2 top-0 right-0 bg-green-600"></div>
 					<div class="absolute w-1/2 h-1/2 bottom-0 left-0 bg-red-600"></div>
 					<div class="absolute w-1/2 h-1/2 bottom-0 right-0 bg-yellow-400"></div>
@@ -46,8 +107,15 @@
 				</div>
 			</div>
 			<div class="w-full flex items-start justify-end h-6 pr-1">
-				<div class='text-[20px] text-white font-extrabold the_secondary_number h-6 flex items-start justify-cenetr rotate-180'>
-					+4
+				<div class='text-[20px] text-white font-extrabold the_secondary_number h-6 flex items-end justify-cenetr rotate-180'>
+					<div class='border   border-white w-full h-3/4  rounded-tr-[60px] rounded-tl-[160px] rounded-br-[160px] rounded-bl-[60px] flex items-center justify-center overflow-hidden'>
+						<div class="relative  w-4 h-6 bg-red-600 rotate-45 ">
+							<div class="absolute w-1/2 h-1/2 top-0 right-0 bg-green-600"></div>
+							<div class="absolute w-1/2 h-1/2 bottom-0 left-0 bg-red-600"></div>
+							<div class="absolute w-1/2 h-1/2 bottom-0 right-0 bg-yellow-400"></div>
+							<div class="absolute w-1/2 h-1/2 top-0 left-0 bg-blue-600"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
