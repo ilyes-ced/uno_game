@@ -4,7 +4,34 @@
 
 
 
+@layer components {
+    .blue_card {
+      @apply bg-blue-600;
+    }
+    .red_card {
+      @apply bg-red-600;
+    }
+    .green_card {
+      @apply bg-green-600;
+    }
+    .yellow_card {
+      @apply bg-yellow-600;
+    }
 
+    .blue_text {
+      @apply text-blue-600;
+    }
+    .red_text {
+      @apply text-red-600;
+    }
+    .green_text {
+      @apply text-green-600;
+    }
+    .yellow_text {
+      @apply text-yellow-600;
+    }
+
+}
 
 
 body{
