@@ -32,9 +32,9 @@
 		//{type: 'number', value:8 },
 		//{type: 'number', value:9 },
 		{type: 'pick_two' },
-		{type: 'pick_four' },
 		{type: 'block' },
 		{type: 'change_direction' },
+		{type: 'pick_four' },
 		{type: 'change_color' },
     ]
 	let more_types = [ "blank", "pick_four", "change_color" ]
@@ -57,9 +57,9 @@
 		{#if card.type === 'number'}
 		 	<Number_card number={card.value} />
   		{:else if card.type === 'change_direction' || card.type === 'block'}
-			<Colored_card type={card.type} />
+			<Arrow_block type={card.type} />
   		{:else}
-  		  	ddue
+			<Colored_card type={card.type} />
   		{/if}
 	{/each}
 
