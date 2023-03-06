@@ -54,21 +54,30 @@
 					<img class="w-6 h-6" src={block} alt="">
 				{:else if type === 'change_direction'}
 					<img class="w-6 h-6" src={arrows} alt="">
-			 	{/if}
+			 	{:else if type === 'pick_two'}
+                    +2
+                {/if}
 			</div>
 			<div class={'border-4 border-white w-4/5 h-full  rounded-[50%]  flex items-center justify-center  custom_rotate'}>
 				{#if type === 'block'}
 					<img class="reverse_custom_rotate h-20 w-h-20" src={block} alt="">
 				{:else if type === 'change_direction'}
 					<img class="reverse_custom_rotate h-20 w-h-20" src={arrows} alt="">
-			 	{/if}
+			 	{:else if type === 'pick_two'}
+                    <div class="absolute  w-8 h-12 reverse_custom_rotate">
+						<div class="absolute w-full h-full bg-white border border-black p-1 rounded-md card_icon top-2 right-2"></div>
+						<div class="absolute w-full h-full bg-white border border-black p-1 rounded-md card_icon bottom-2 left-2"></div>
+					</div>
+                {/if}
 			</div>
 			<div class=' absolute bottom-0 right-0 text-[20px] text-white font-extrabold the_secondary_number flex items-center p-1 '>
 				{#if type === 'block'}
 					<img class="w-6 h-6" src={block} alt="">
 				{:else if type === 'change_direction'}
 					<img class="w-6 h-6" src={arrows} alt="">
-			 	{/if}
+			 	{:else if type === 'pick_two'}
+                    +2
+                {/if}
 			</div>
 		</div>
 	</div>
