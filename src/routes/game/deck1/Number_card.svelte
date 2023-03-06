@@ -1,5 +1,6 @@
 <script lang='ts'>
     export let  number: number;
+    export let  bg: string;
 </script>
 
 
@@ -7,7 +8,7 @@
 <div>
 
 		<div class='bg-white p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-			<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center red_card relative' }>
+			<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  relative '+ bg+'_card'  }>
 				<div class=' absolute top-0 left-0 text-[20px] text-white font-extrabold the_secondary_number flex items-center pl-2'>
 					{number}
 				</div>

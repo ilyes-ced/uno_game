@@ -15,7 +15,10 @@
       @apply bg-green-600;
     }
     .yellow_card {
-      @apply bg-yellow-600;
+      @apply bg-yellow-400;
+    }
+    .black_card {
+      @apply bg-black;
     }
 
     .blue_text {
@@ -28,7 +31,7 @@
       @apply text-green-600;
     }
     .yellow_text {
-      @apply text-yellow-600;
+      @apply text-yellow-400;
     }
 
 
@@ -145,4 +148,37 @@ user-select: none; /* Standard */
   background:rgb(220 38 38);
   left:calc(50% - 7px);
   transform:rotatez(45deg);
+}
+
+
+
+
+
+.blue_card {
+  background-color: rgb(37 99 235);
+}
+.red_card {
+  background-color: rgb(220 38 38);
+}
+.green_card {
+  background-color: rgb(22 163 74);
+}
+.yellow_card {
+  background-color: rgb(250 204 21);
+}
+.black_card {
+  background-color: black;
+}
+
+.blue_text {
+  background-color: rgb(37 99 235);
+}
+.red_text {
+  background-color: rgb(220 38 38);
+}
+.green_text {
+  background-color: rgb(22 163 74);
+}
+.yellow_text {
+  background-color: rgb(250 204 21);
 }
