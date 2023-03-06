@@ -5,6 +5,10 @@
     import arrows from '$lib/images/arrows.svg';
 
 
+
+    //import number_card_style2 from './number_card_style2.svelte';
+
+
 	let cards = [
 		{color: 'bg-yellow-400', text: 'text-yellow-400'},
 		{color: 'bg-red-600', text: 'text-red-600'},
@@ -14,7 +18,7 @@
 	]
 
     let cards_types = [
-        'card_1', 'card_2', 'card_3', 'card_4', 'card_5', 'card_6', 'card_7', 'card_8', 'card_9',
+        'card_1', 'card_2', 'card_3', 'card_4', 'card_5', 'card_6', 'card_7', 'card_8', 'card_9', 'card_0',
         "pick_two", "pick_four", "second_block", "change_direction", "change_color" 
     ]
 	let more_types = [ "blank", "pick_four", "change_color" ]
@@ -32,7 +36,6 @@
 
 
 <div class='bg-gray-700  grid grid-cols-5 '>
-
 
 
 
