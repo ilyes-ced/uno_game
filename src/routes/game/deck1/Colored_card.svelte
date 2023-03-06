@@ -7,7 +7,6 @@
 
 <div>
 
-	{is_blank}
 	<div class='bg-white p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
 		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  relative  '+ bg +'_card' }>
 			<div class=" absolute top-1 left-1 w-10 h-10  flex items-start justify-start ">

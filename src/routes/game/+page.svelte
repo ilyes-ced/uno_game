@@ -102,7 +102,23 @@
 
 <div class='bg-gray-700  grid grid-cols-5 '>
 
-	{#each cards_tempo as card}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	{#each cards_tempo as card, i}
 		{#if card.type === 'number'}
 		 	<Number_card number={card.value} bg={card.color}  />
   		{:else if card.type === 'change_direction' || card.type === 'block' || card.type === 'pick_two'}

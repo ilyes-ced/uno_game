@@ -167,7 +167,7 @@ user-select: none; /* Standard */
   background-color: rgb(250 204 21);
 }
 .black_card {
-  background-color: black;
+  background-color: #171717;
 }
 
 .blue_text {
@@ -181,4 +181,8 @@ user-select: none; /* Standard */
 }
 .yellow_text {
   background-color: rgb(250 204 21);
+}
+
+.hhhh{
+  background-color: #171717;
 }
