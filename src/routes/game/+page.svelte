@@ -1,12 +1,15 @@
 <script lang='ts'>
 
 	import block from '$lib/images/block.svg';
-    import second_block from '$lib/images/second_block.svg';
     import arrows from '$lib/images/arrows.svg';
+    import second_block from '$lib/images/second_block.svg';
 
 
 
-    //import number_card_style2 from './number_card_style2.svelte';
+    import Number_card from './deck1/Number_card.svelte';
+	import Arrow_block from './deck1/Arrow_block.svelte';
+	import Two_four from './deck1/Two_four.svelte';
+	import Colored_card from './deck1/Colored_card.svelte';
 
 
 	let cards = [
@@ -17,9 +20,22 @@
         
 	]
 
-    let cards_types = [
-        'card_1', 'card_2', 'card_3', 'card_4', 'card_5', 'card_6', 'card_7', 'card_8', 'card_9', 'card_0',
-        "pick_two", "pick_four", "second_block", "change_direction", "change_color" 
+    let cards_tempo = [
+		//{type: 'number', value:0 },
+		//{type: 'number', value:1 },
+		//{type: 'number', value:2 },
+		//{type: 'number', value:3 },
+		//{type: 'number', value:4 },
+		//{type: 'number', value:5 },
+		//{type: 'number', value:6 },
+		//{type: 'number', value:7 },
+		//{type: 'number', value:8 },
+		//{type: 'number', value:9 },
+		{type: 'pick_two' },
+		{type: 'pick_four' },
+		{type: 'block' },
+		{type: 'change_direction' },
+		{type: 'change_color' },
     ]
 	let more_types = [ "blank", "pick_four", "change_color" ]
 
@@ -36,6 +52,16 @@
 
 
 <div class='bg-gray-700  grid grid-cols-5 '>
+
+	{#each cards_tempo as card}
+		{#if card.type === 'number'}
+		 	<Number_card number={card.value} />
+  		{:else if card.type === 'change_direction' || card.type === 'block'}
+			<Colored_card type={card.type} />
+  		{:else}
+  		  	ddue
+  		{/if}
+	{/each}
 
 
 
