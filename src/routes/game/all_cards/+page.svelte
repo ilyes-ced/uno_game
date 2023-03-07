@@ -1,7 +1,7 @@
 <script lang='ts'>
 
-    import block from '$lib/images/block.svg';
-    import arrows from '$lib/images/arrows.svg';
+    import red_block from '$lib/images/red_block.svg';
+    import red_arrows from '$lib/images/red_arrows.svg';
     import second_block from '$lib/images/second_block.svg';
     let cards = [
     	{color: 'bg-yellow-400', text: 'text-yellow-400'},
@@ -46,7 +46,7 @@
 				</div>
 			</div>
 			<div class='bg-white w-full h-3/4  rounded-tr-[60px] rounded-tl-[160px] rounded-br-[160px] rounded-bl-[60px] flex items-center justify-center'>
-				<img class="w-3/4 h-3/4" src={block} alt="">
+				<img class="w-3/4 h-3/4" src={red_block} alt="">
 			</div>
 			<div class="w-full flex items-start justify-end h-6 pr-1">
 				<div class='text-[20px] text-white font-extrabold the_secondary_number h-6 flex items-start justify-cenetr rotate-180'>
@@ -86,7 +86,7 @@
 				</div>
 			</div>
 			<div class='bg-white w-full h-3/4  rounded-tr-[60px] rounded-tl-[160px] rounded-br-[160px] rounded-bl-[60px] flex items-center justify-center'>
-				<img class="w-3/4 h-3/4" src={arrows} alt="">
+				<img class="w-3/4 h-3/4" src={red_arrows} alt="">
 			</div>
 			<div class="w-full flex items-start justify-end h-6 pr-1">
 				<div class='text-[20px] text-white font-extrabold the_secondary_number h-6 flex items-start justify-cenetr rotate-180'>
