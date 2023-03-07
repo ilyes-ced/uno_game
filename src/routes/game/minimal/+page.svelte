@@ -79,7 +79,6 @@
 		{type: 'change_color', color: 'black' },
 		{type: 'change_color', color: 'black', is_blank:true },
     ]
-	let more_types = [ "blank", "pick_four", "change_color" ]
 
     
 </script>

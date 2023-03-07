@@ -231,3 +231,9 @@ user-select: none; /* Standard */
   background-color: red !important;
   transform: rotateY(180deg);
 }
+
+
+
+.raised{
+  translate: 0px 100px;
+}
