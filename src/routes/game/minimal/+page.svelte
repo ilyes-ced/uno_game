@@ -1,5 +1,87 @@
-<script>
+<script lang='ts'>
 
+
+	import Number_card from './Number_card.svelte';
+	import Arrow_block from './Arrow_block.svelte';
+	import Fours from './Fours.svelte';
+	import Colored_card from './Colored_card.svelte';
+	const green_bg = 'green'
+	const red_bg = 'red'
+	const yellow_bg = 'yellow'
+	const blue_bg = 'blue'
+	const green_text = 'text-yellow-400'
+	const red_text = 'text-red-600'
+	const yellow_text = 'text-blue-600'
+	const blue_text = 'text-green-600'
+
+	let cards_tempo = [
+		{type: 'number', value:0, color: yellow_bg },
+		{type: 'number', value:0, color: red_bg },
+		{type: 'number', value:0, color: blue_bg },
+		{type: 'number', value:0, color: green_bg },
+		{type: 'number', value:1, color: yellow_bg },
+		{type: 'number', value:1, color: red_bg },
+		{type: 'number', value:1, color: blue_bg },
+		{type: 'number', value:1, color: green_bg },
+		{type: 'number', value:2, color: yellow_bg },
+		{type: 'number', value:2, color: red_bg },
+		{type: 'number', value:2, color: blue_bg },
+		{type: 'number', value:2, color: green_bg },
+		{type: 'number', value:3, color: yellow_bg },
+		{type: 'number', value:3, color: red_bg },
+		{type: 'number', value:3, color: blue_bg },
+		{type: 'number', value:3, color: green_bg },
+		{type: 'number', value:4, color: yellow_bg },
+		{type: 'number', value:4, color: red_bg },
+		{type: 'number', value:4, color: blue_bg },
+		{type: 'number', value:4, color: green_bg },
+		{type: 'number', value:5, color: yellow_bg },
+		{type: 'number', value:5, color: red_bg },
+		{type: 'number', value:5, color: blue_bg },
+		{type: 'number', value:5, color: green_bg },
+		{type: 'number', value:6, color: yellow_bg },
+		{type: 'number', value:6, color: red_bg },
+		{type: 'number', value:6, color: blue_bg },
+		{type: 'number', value:6, color: green_bg },
+		{type: 'number', value:7, color: yellow_bg },
+		{type: 'number', value:7, color: red_bg },
+		{type: 'number', value:7, color: blue_bg },
+		{type: 'number', value:7, color: green_bg },
+		{type: 'number', value:8, color: yellow_bg },
+		{type: 'number', value:8, color: red_bg },
+		{type: 'number', value:8, color: blue_bg },
+		{type: 'number', value:8, color: green_bg },
+		{type: 'number', value:9, color: yellow_bg },
+		{type: 'number', value:9, color: red_bg },
+		{type: 'number', value:9, color: blue_bg },
+		{type: 'number', value:9, color: green_bg },
+		{type: 'pick_two', color: yellow_bg },
+		{type: 'pick_two', color: red_bg },
+		{type: 'pick_two', color: blue_bg },
+		{type: 'pick_two', color: green_bg },
+		{type: 'block', color: yellow_bg },
+		{type: 'block', color: red_bg },
+		{type: 'block', color: blue_bg },
+		{type: 'block', color: green_bg },
+		{type: 'change_direction', color: yellow_bg },
+		{type: 'change_direction', color: red_bg },
+		{type: 'change_direction', color: blue_bg },
+		{type: 'change_direction', color: green_bg },
+		{type: 'pick_four', color: yellow_bg },
+		{type: 'pick_four', color: red_bg },
+		{type: 'pick_four', color: blue_bg },
+		{type: 'pick_four', color: green_bg },
+		{type: 'pick_four', color: 'black' },
+		{type: 'change_color', color: yellow_bg },
+		{type: 'change_color', color: red_bg },
+		{type: 'change_color', color: blue_bg },
+		{type: 'change_color', color: green_bg },
+		{type: 'change_color', color: 'black' },
+		{type: 'change_color', color: 'black', is_blank:true },
+    ]
+	let more_types = [ "blank", "pick_four", "change_color" ]
+
+    
 </script>
 
 
@@ -29,164 +111,21 @@
 
 
 
-    <div class='black_card p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  '}>
-			<div class="w-full flex items-start justify-start h-6 p-1 ">
-				<div class='w-6 h-6 rounded-[50%] aspect-square  grid grid-cols-2 gap-[2px]'>
-                    <div class='border-t-2 border-l-2 h-full w-full rounded-tl-full border-green-600 ' ></div>
-                    <div class='border-t-2 border-r-2 h-full w-full rounded-tr-full border-red-600' ></div>
-                    <div class='border-b-2 border-l-2 h-full w-full rounded-bl-full border-blue-600' ></div>
-                    <div class='border-b-2 border-r-2 h-full w-full rounded-br-full border-yellow-400' ></div>
-            </div>
-			</div>
-			<div class=' w-full h-3/4  flex items-center justify-center'>
-				<div class='w-16 h-16 rounded-[50%] aspect-square  grid grid-cols-2 gap-[2px]'>
-                        <div class='border-t-2 border-l-2 h-full w-full rounded-tl-full border-green-600 ' ></div>
-                        <div class='border-t-2 border-r-2 h-full w-full rounded-tr-full border-red-600' ></div>
-                        <div class='border-b-2 border-l-2 h-full w-full rounded-bl-full border-blue-600' ></div>
-                        <div class='border-b-2 border-r-2 h-full w-full rounded-br-full border-yellow-400' ></div>
-                </div>
-			</div>
-			<div class="w-full flex items-end justify-end h-6 p-1 ">
-				<div class='w-6 h-6 rounded-[50%] aspect-square  grid grid-cols-2 gap-[2px] '>
-                    <div class='border-t-2 border-l-2 h-full w-full rounded-tl-full border-green-600 ' ></div>
-                    <div class='border-t-2 border-r-2 h-full w-full rounded-tr-full border-red-600' ></div>
-                    <div class='border-b-2 border-l-2 h-full w-full rounded-bl-full border-blue-600' ></div>
-                    <div class='border-b-2 border-r-2 h-full w-full rounded-br-full border-yellow-400' ></div>
-            </div>
-			</div>
-		</div>
-	</div>
 
 
 
 
-
-    <div class='black_card p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  '}>
-			<div class="w-full flex items-start justify-start h-6 pl-1">
-				<div class='text-[20px] text-white   h-6 flex items-start justify-cenetr'>
-					+4
-				</div>
-			</div>
-			<div class=' w-full h-3/4  flex items-center justify-center'>
-				<div class="absolute  w-8 h-12  ">
-                    <div class="absolute w-full h-full  rounded-md  top-6 right-6    border-2 border-green-600"></div>
-                    <div class="absolute w-full h-full  rounded-md  bottom-8 left-8  border-2 border-red-600"></div>
-                    <div class="absolute w-full h-full  rounded-md  bottom-4 right-2 border-2 border-yellow-400"></div>
-                    <div class="absolute w-full h-full  rounded-md  top-2 left-4     border-2 border-blue-600"></div>
-                </div>
-			</div>
-			<div class="w-full flex items-start justify-end h-6 pr-1">
-				<div class='text-[20px] text-white   h-6 flex items-start justify-cenetr rotate-180'>
-					+4
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-    <div class='red_card p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  '}>
-			<div class="w-full flex items-start justify-start h-6 pl-1">
-				<div class='text-[20px] text-white  h-6 flex items-start justify-cenetr'>
-					5
-				</div>
-			</div>
-			<div class=' w-full h-3/4  flex items-center justify-center'>
-				<div class={ 'text-[100px]  text-white '  } >
-                    5
-                </div>
-			</div>
-			<div class="w-full flex items-start justify-end h-6 pr-1">
-				<div class='text-[20px] text-white  h-6 flex items-start justify-cenetr rotate-180'>
-					5
-				</div>
-			</div>
-		</div>
-	</div>
-
-    <div class='blue_card p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  '}>
-			<div class="w-full flex items-start justify-start h-6 pl-1">
-				<div class='text-[20px] text-white  h-6 flex items-start justify-cenetr'>
-					2
-				</div>
-			</div>
-			<div class=' w-full h-3/4  flex items-center justify-center'>
-				<div class={ 'text-[100px]  text-white '  } >
-                    2
-                </div>
-			</div>
-			<div class="w-full flex items-start justify-end h-6 pr-1">
-				<div class='text-[20px] text-white  h-6 flex items-start justify-cenetr rotate-180'>
-					2
-				</div>
-			</div>
-		</div>
-	</div>
-
-    <div class='green_card p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  '}>
-			<div class="w-full flex items-start justify-start h-6 pl-1">
-				<div class='text-[20px] text-white  h-6 flex items-start justify-cenetr'>
-					8
-				</div>
-			</div>
-			<div class=' w-full h-3/4  flex items-center justify-center'>
-				<div class={ 'text-[100px]  text-white '  } >
-                    8
-                </div>
-			</div>
-			<div class="w-full flex items-start justify-end h-6 pr-1">
-				<div class='text-[20px] text-white  h-6 flex items-start justify-cenetr rotate-180'>
-					8
-				</div>
-			</div>
-		</div>
-	</div>
-
-    <div class='yellow_card p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  '}>
-			<div class="w-full flex items-start justify-start h-6 pl-1">
-				<div class='text-[20px] text-white  h-6 flex items-start justify-cenetr'>
-					9
-				</div>
-			</div>
-			<div class=' w-full h-3/4  flex items-center justify-center'>
-				<div class={ 'text-[100px]  text-white '  } >
-                    9
-                </div>
-			</div>
-			<div class="w-full flex items-start justify-end h-6 pr-1">
-				<div class='text-[20px] text-white  h-6 flex items-start justify-cenetr rotate-180'>
-					9
-				</div>
-			</div>
-		</div>
-	</div>
-
-    <div class='yellow_card p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  '}>
-			<div class="w-full flex items-start justify-start h-6 pl-1">
-				<div class='text-[20px] text-white  h-6 flex items-start justify-cenetr'>
-					+2
-				</div>
-			</div>
-			<div class=' w-full h-3/4  flex items-center justify-center'>
-				<div class="absolute  w-8 h-12 ">
-                    <div class="absolute w-full h-full  border-2  p-1 rounded-md  top-4 right-2"></div>
-                    <div class="absolute w-full h-full  border-2  p-1 rounded-md  bottom-4 left-2"></div>
-                </div>
-			</div>
-			<div class="w-full flex items-start justify-end h-6 pr-1">
-				<div class='text-[20px] text-white  h-6 flex items-start justify-cenetr rotate-180'>
-					+2
-				</div>
-			</div>
-		</div>
-	</div>
+	{#each cards_tempo as card, i}
+		{#if card.type === 'number'}
+		 	<Number_card number={card.value} bg={card.color}  />
+  		{:else if card.type === 'change_direction' || card.type === 'block' || card.type === 'pick_two'}
+			<Arrow_block type={card.type} bg={card.color}  />
+  		{:else if card.type === 'pick_four'}
+		  	<Fours type={card.type} bg={card.color}  />
+  		{:else if card.type === 'change_color'}
+		  	<Colored_card type={card.type} bg={card.color} is_blank={card.is_blank} />
+  		{/if}
+	{/each}
 
 
 
@@ -198,110 +137,6 @@
 
 
 
-
-    <div class='yellow_card p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  '}>
-			<div class="w-full flex items-start justify-start h-6 p-1">
-				<div class=' w-6 h-6 relative flex items-center justify-center'>
-					<div class='absolute w-6 h-6 rounded-[50%] border-2 border-white'></div>
-					<div class='absolute h-6  border-[1px] border-white -rotate-45  bg-white '></div>
-				</div>
-			</div>
-			<div class=' w-full h-3/4  flex items-center justify-center relative'>
-                <div class='absolute w-16 h-16 rounded-[50%] border-4 border-white'></div>
-                <div class='absolute h-16 w-1 -rotate-45 bg-white '></div>
-			</div>
-			<div class="w-full flex items-end justify-end h-6 p-1 ">
-				<div class=' w-6 h-6 relative flex items-center justify-center'>
-					<div class='absolute w-6 h-6 rounded-[50%] border-2 border-white'></div>
-					<div class='absolute h-6  border-[1px] border-white -rotate-45  bg-white '></div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='yellow_card p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  '}>
-			<div class="w-full flex items-start justify-start h-6   ">
-				<div class='w-6 h-6 mt-3'>
-					<div class='absolute w-6 h-2 rounded-br-md border-b-2 border-r-2 border-white mb-2 ml-1 rotate-[135deg]  '>
-						<div class='w-2 h-2 border-b-2 border-l-2  border-white  absolute top-[3px]  rotate-45'></div>
-					</div>
-					<div class='absolute w-6 h-2 rounded-br-md  border-b-2 border-r-2 border-white mt-2 mr-1 -rotate-45  '>
-						<div class='w-2 h-2 border-b-2 border-l-2  border-white  absolute top-[3px]  rotate-45'></div>
-					</div>
-				</div>
-			</div>
-			<div class=' w-full h-3/4  flex items-center justify-center relative'>
-                <div class='absolute w-12 h-4 rounded-br-xl border-b-2 border-r-2 border-white mb-4 ml-2 rotate-[135deg]  '>
-					<div class='w-4 h-4 border-b-2 border-l-2  border-white  absolute top-[7px]  rotate-45'></div>
-				</div>
-                <div class='absolute w-12 h-4 rounded-br-xl  border-b-2 border-r-2 border-white mt-4 mr-2 -rotate-45  '>
-					<div class='w-4 h-4 border-b-2 border-l-2  border-white  absolute top-[7px]  rotate-45'></div>
-				</div>
-			</div>
-			<div class="w-full flex items-start justify-end h-6 pr-1">
-				<div class='w-6 h-6 mb-3'>
-					<div class='absolute w-6 h-2 rounded-br-md border-b-2 border-r-2 border-white mb-2 ml-1 rotate-[135deg]  '>
-						<div class='w-2 h-2 border-b-2 border-l-2  border-white  absolute top-[3px]  rotate-45'></div>
-					</div>
-					<div class='absolute w-6 h-2 rounded-br-md  border-b-2 border-r-2 border-white mt-2 mr-1 -rotate-45  '>
-						<div class='w-2 h-2 border-b-2 border-l-2  border-white  absolute top-[3px]  rotate-45'></div>
-					</div>
-				</div>	
-			</div>
-		</div>
-	</div>
-
-
-
-    <div class='red_card p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  '}>
-			<div class="w-full flex items-start justify-start h-6   ">
-				<div class='w-6 h-6 mt-3'>
-					<div class='absolute w-6 h-2 rounded-br-md border-b-2 border-r-2 border-white mb-2 ml-1 rotate-[135deg]  '>
-						<div class='w-2 h-2 border-b-2 border-l-2  border-white  absolute top-[3px]  rotate-45'></div>
-					</div>
-					<div class='absolute w-6 h-2 rounded-br-md  border-b-2 border-r-2 border-white mt-2 mr-1 -rotate-45  '>
-						<div class='w-2 h-2 border-b-2 border-l-2  border-white  absolute top-[3px]  rotate-45'></div>
-					</div>
-				</div>
-			</div>
-			<div class=' w-full h-3/4  flex items-center justify-center relative'>
-                <div class='absolute w-12 h-4 rounded-br-xl border-b-2 border-r-2 border-white mb-4 ml-2 rotate-[135deg]  '>
-					<div class='w-4 h-4 border-b-2 border-l-2  border-white  absolute top-[7px]  rotate-45'></div>
-				</div>
-                <div class='absolute w-12 h-4 rounded-br-xl  border-b-2 border-r-2 border-white mt-4 mr-2 -rotate-45  '>
-					<div class='w-4 h-4 border-b-2 border-l-2  border-white  absolute top-[7px]  rotate-45'></div>
-				</div>
-			</div>
-			<div class="w-full flex items-start justify-end h-6 pr-1">
-				<div class='w-6 h-6 mb-3'>
-					<div class='absolute w-6 h-2 rounded-br-md border-b-2 border-r-2 border-white mb-2 ml-1 rotate-[135deg]  '>
-						<div class='w-2 h-2 border-b-2 border-l-2  border-white  absolute top-[3px]  rotate-45'></div>
-					</div>
-					<div class='absolute w-6 h-2 rounded-br-md  border-b-2 border-r-2 border-white mt-2 mr-1 -rotate-45  '>
-						<div class='w-2 h-2 border-b-2 border-l-2  border-white  absolute top-[3px]  rotate-45'></div>
-					</div>
-				</div>	
-			</div>
-		</div>
-	</div>
-
-
-
-
+	
 
 </div>
