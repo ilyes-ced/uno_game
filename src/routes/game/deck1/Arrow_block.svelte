@@ -54,7 +54,7 @@
 				{#if type === 'block'}
 					<img class="w-6 h-6" src={block} alt="">
 				{:else if type === 'change_direction'}
-					<img class="w-6 h-6" src={arrows} alt="">
+					<img class="w-6 h-6 -rotate-[10deg]" src={arrows} alt="">
 			 	{:else if type === 'pick_two'}
                     +2
                 {/if}
@@ -63,7 +63,7 @@
 				{#if type === 'block'}
 					<img class="reverse_custom_rotate h-20 w-h-20" src={block} alt="">
 				{:else if type === 'change_direction'}
-					<img class="reverse_custom_rotate h-20 w-h-20" src={arrows} alt="">
+					<img class="reverse_custom_rotate -rotate-[10deg] h-20 w-h-20" src={arrows} alt="">
 			 	{:else if type === 'pick_two'}
                     <div class="absolute  w-8 h-12 reverse_custom_rotate">
 						<div class="absolute w-full h-full bg-white border border-black p-1 rounded-md card_icon top-2 right-2"></div>
@@ -75,7 +75,7 @@
 				{#if type === 'block'}
 					<img class="w-6 h-6" src={block} alt="">
 				{:else if type === 'change_direction'}
-					<img class="w-6 h-6" src={arrows} alt="">
+					<img class="w-6 h-6 -rotate-[10deg]" src={arrows} alt="">
 			 	{:else if type === 'pick_two'}
                     +2
                 {/if}
