@@ -128,7 +128,21 @@ user-select: none; /* Standard */
 
 
 }
+.minimal_uno_text{
 
+  text-shadow:
+  -4px  4px 0 #171717,
+ -1px -1px 0 #171717,
+ -1px  1px 0 #171717,
+  1px -1px 0 #171717,
+  1px  0   0 #171717,
+ -1px  0   0 #171717,
+  0   -1px 0 #171717,
+  0    1px 0 #171717,
+  2px  2px 0 #171717,
+  3px 3px 0 #171717,
+  -3px -3px 0 #171717;
+}
 
 
 
