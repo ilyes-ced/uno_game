@@ -2,31 +2,50 @@
 	export let  type: string;
     export let  bg: string;
 
-
-SWItch statement import based on bg
+	
+//	if(bg === 'red'){
+//		import block from '$lib/images/red_block.svg';
+//	    import arrows from '$lib/images/red_arrows.svg';
+//	}else if(bg === 'green'){
+//		import block from '$lib/images/green_block.svg';
+//	    import arrows from '$lib/images/green_arrows.svg';
+//	}else if(bg ===k 'blue'){
+//		import arrows from '$lib/images/blue_arrows.svg';
+//		import bloc from '$lib/images/blue_block.svg';
+//	}else if(bg === 'yellow'){
+//		import block from '$lib/images/yellow_block.svg';
+//	    import arrows from '$lib/images/yellow_arrows.svg';
+//	}
+	
+	import white_block from '$lib/images/white_block.svg';
+	import white_arrows from '$lib/images/white_arrows.svg';
+	
 
 
 	import red_block from '$lib/images/red_block.svg';
-	import blue_block from '$lib/images/blue_block.svg';
-	import green_block from '$lib/images/green_block.svg';
-	import yellow_block from '$lib/images/yellow_block.svg';
-	
     import red_arrows from '$lib/images/red_arrows.svg';
-    import blue_arrows from '$lib/images/blue_arrows.svg';
+	
+	import green_block from '$lib/images/green_block.svg';
     import green_arrows from '$lib/images/green_arrows.svg';
+	
+    import blue_arrows from '$lib/images/blue_arrows.svg';
+	import blue_block from '$lib/images/blue_block.svg';
+	
+	import yellow_block from '$lib/images/yellow_block.svg';
     import yellow_arrows from '$lib/images/yellow_arrows.svg';
-	let block_arr = [ 
-		red_block,
-		blue_block,
-		green_block,
-		yellow_block
-	 ]
-	arrows_arr = [ 
-		red_arrows,
-		blue_arrows,
-		green_arrows,
-		yellow_arrows
-	 ]
+	
+	//let block_arr = [ 
+	//	red_block,
+	//	blue_block,
+	//	green_block,
+	//	yellow_block
+	// ]
+	//arrows_arr = [ 
+	//	red_arrows,
+	//	blue_arrows,
+	//	green_arrows,
+	//	yellow_arrows
+	// ]
 
 
 	//let red_block = '$lib/images/red_block.svg';
@@ -79,10 +98,6 @@ SWItch statement import based on bg
 
 <div>
 
-	<img class="w-6 h-6 mt-1" src={`red_block_import`} alt="">
-	<img class="w-6 h-6 mt-1" src={blue_block_import} alt="">
-	<img class="w-6 h-6 mt-1" src={red_arrows_import} alt="">
-	<img class="w-6 h-6 mt-1" src={blue_arrows_import} alt="">
 
 
 
@@ -91,9 +106,9 @@ SWItch statement import based on bg
 			<div class="w-full flex items-start justify-start h-6 pl-1">
 				<div class='text-[20px] text-white font-extrabold the_secondary_number h-6 flex items-start justify-cenetr'>
 					{#if type === 'block'}
-						<img class="w-6 h-6 mt-1" src={'$lib/images/'+bg+'_arrows.svg'} alt="">
+						<img class="w-6 h-6 mt-1" src={white_block} alt="">
 					{:else if type === 'change_direction'}
-						<img class="w-6 h-6 mt-1 -rotate-[10deg] " src={'$lib/images/'+bg+'_arrows.svg'} alt="">
+						<img class="w-6 h-6 mt-1 -rotate-[10deg] " src={white_arrows} alt="">
 			 		{:else if type === 'pick_two'}
                 	    +2
                 	{/if}
@@ -101,9 +116,25 @@ SWItch statement import based on bg
 			</div>
 			<div class='bg-white w-full h-3/4  rounded-tr-[60px] rounded-tl-[160px] rounded-br-[160px] rounded-bl-[60px] flex items-center justify-center '>
 				{#if type === 'block'}
-					<img class=" h-20 w-h-20" src={'$lib/images/'+bg+'_block.svg'} alt="">
+					{#if bg === 'blue'}
+						<img class=" h-20 w-h-20" src={blue_block} alt="">
+					{:else if  bg === 'red'}
+						<img class=" h-20 w-h-20" src={red_block} alt="">
+					{:else if  bg === 'green'}
+						<img class=" h-20 w-h-20" src={green_block} alt="">
+					{:else if  bg === 'yellow'}
+						<img class=" h-20 w-h-20" src={yellow_block} alt="">
+					{/if}
 				{:else if type === 'change_direction'}
-					<img class=" -rotate-[10deg] h-20 w-h-20" src={'$lib/images/'+bg+'_arrows.svg'} alt="">
+					{#if bg === 'blue'}
+						<img class=" -rotate-[10deg] h-20 w-h-20" src={blue_arrows} alt="">
+					{:else if  bg === 'red'}
+						<img class=" -rotate-[10deg] h-20 w-h-20" src={red_arrows} alt="">
+					{:else if  bg === 'green'}
+						<img class=" -rotate-[10deg] h-20 w-h-20" src={green_arrows} alt="">
+					{:else if  bg === 'yellow'}
+						<img class=" -rotate-[10deg] h-20 w-h-20" src={yellow_arrows} alt="">
+					{/if}
 			 	{:else if type === 'pick_two'}
                     <div class="absolute  w-8 h-12 ">
 						<div class={"absolute w-full h-full border border-black p-1 rounded-md card_icon top-2 right-2 "+bg+'_card'}></div>
@@ -114,9 +145,9 @@ SWItch statement import based on bg
 			<div class="w-full flex items-start justify-end h-6 pr-1">
 				<div class='text-[20px] text-white font-extrabold the_secondary_number h-6 flex items-start justify-cenetr rotate-180'>
 					{#if type === 'block'}
-						<img class="w-6 h-6 mt-1" src={'$lib/images/'+bg+'_block.svg'} alt="">
+						<img class="w-6 h-6 mt-1" src={white_block} alt="">
 					{:else if type === 'change_direction'}
-						<img class="w-6 h-6 mt-1 -rotate-[10deg] " src={'$lib/images/'+bg+'_arrows.svg'} alt="">
+						<img class="w-6 h-6 mt-1 -rotate-[10deg] " src={white_arrows} alt="">
 			 		{:else if type === 'pick_two'}
                 	    +2
                 	{/if}
