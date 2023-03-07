@@ -235,5 +235,5 @@ user-select: none; /* Standard */
 
 
 .raised{
-  translate: 0px 100px;
+  translate: 0px -100px;
 }
