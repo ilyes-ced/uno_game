@@ -207,16 +207,16 @@ user-select: none; /* Standard */
 }
 
 .blue_text {
-  background-color: rgb(37 99 235);
+  color: rgb(37 99 235);
 }
 .red_text {
-  background-color: rgb(220 38 38);
+  color: rgb(220 38 38);
 }
 .green_text {
-  background-color: rgb(22 163 74);
+  color: rgb(22 163 74);
 }
 .yellow_text {
-  background-color: rgb(250 204 21);
+  color: rgb(250 204 21);
 }
 
 .hhhh{
