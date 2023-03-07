@@ -110,6 +110,28 @@ user-select: none; /* Standard */
 
 }
 
+
+
+.uno_text{
+  text-shadow:
+  -4px  4px 0 #000000,
+ -1px -1px 0 #000000,
+ -1px  1px 0 #000000,
+  1px -1px 0 #000000,
+  1px  0   0 #000000,
+ -1px  0   0 #000000,
+  0   -1px 0 #000000,
+  0    1px 0 #000000,
+  2px  2px 0 #000000,
+  3px 3px 0 #fff,
+  -3px -3px 0 #fff;
+
+
+}
+
+
+
+
 .custom_rotate{
   rotate: 30deg;
 }
@@ -185,4 +207,13 @@ user-select: none; /* Standard */
 
 .hhhh{
   background-color: #171717;
+}
+
+
+.card{
+  transition: cubic-bezier(0.215, 0.610, 0.355, 1) all 300ms;
+}
+.flip_card{
+  background-color: red !important;
+  transform: rotateY(180deg);
 }

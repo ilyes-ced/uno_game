@@ -7,8 +7,8 @@
 
 <div>
 
-	<div class='bg-white p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  relative  '+ bg +'_card' }>
+	<div class='card bg-white p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
+		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center pointer-events-none relative  '+ bg +'_card' }>
 			<div class=" absolute top-1 left-1 w-10 h-10  flex items-start justify-start ">
 				<div class='text-[20px] text-white font-extrabold the_secondary_number h-full flex items-end justify '>
 					<div class={'border-2 border-white w-4/5 h-full  rounded-[50%]  flex items-center justify-center  custom_rotate overflow-hidden'}>

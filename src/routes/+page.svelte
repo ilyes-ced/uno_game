@@ -17,7 +17,8 @@
 
 
 
-hello 
+	<button class='p-2 bg-gray-500 rounded-lg border border-white hover:bg-gray-600' >public game</button>
+	<button class='p-2 bg-gray-500 rounded-lg border border-white hover:bg-gray-600' >private game</button>
 
 
 </div>
