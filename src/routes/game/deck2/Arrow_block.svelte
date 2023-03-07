@@ -96,65 +96,60 @@
 
 
 
-<div>
 
 
 
-
-	<div class='bg-white p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-		<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center pointer-events-none '+bg+'_card' }>
-			<div class="w-full flex items-start justify-start h-6 pl-1">
-				<div class='text-[20px] text-white font-extrabold the_secondary_number h-6 flex items-start justify-cenetr'>
-					{#if type === 'block'}
-						<img class="w-6 h-6 mt-1" src={white_block} alt="">
-					{:else if type === 'change_direction'}
-						<img class="w-6 h-6 mt-1 -rotate-[10deg] " src={white_arrows} alt="">
-			 		{:else if type === 'pick_two'}
-                	    +2
-                	{/if}
-				</div>
-			</div>
-			<div class='bg-white w-full h-3/4  rounded-tr-[60px] rounded-tl-[160px] rounded-br-[160px] rounded-bl-[60px] flex items-center justify-center '>
+<div class='bg-white p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
+	<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center pointer-events-none '+bg+'_card' }>
+		<div class="w-full flex items-start justify-start h-6 pl-1">
+			<div class='text-[20px] text-white font-extrabold the_secondary_number h-6 flex items-start justify-cenetr'>
 				{#if type === 'block'}
-					{#if bg === 'blue'}
-						<img class=" h-20 w-h-20" src={blue_block} alt="">
-					{:else if  bg === 'red'}
-						<img class=" h-20 w-h-20" src={red_block} alt="">
-					{:else if  bg === 'green'}
-						<img class=" h-20 w-h-20" src={green_block} alt="">
-					{:else if  bg === 'yellow'}
-						<img class=" h-20 w-h-20" src={yellow_block} alt="">
-					{/if}
+					<img class="w-6 h-6 mt-1" src={white_block} alt="">
 				{:else if type === 'change_direction'}
-					{#if bg === 'blue'}
-						<img class=" -rotate-[10deg] h-20 w-h-20" src={blue_arrows} alt="">
-					{:else if  bg === 'red'}
-						<img class=" -rotate-[10deg] h-20 w-h-20" src={red_arrows} alt="">
-					{:else if  bg === 'green'}
-						<img class=" -rotate-[10deg] h-20 w-h-20" src={green_arrows} alt="">
-					{:else if  bg === 'yellow'}
-						<img class=" -rotate-[10deg] h-20 w-h-20" src={yellow_arrows} alt="">
-					{/if}
-			 	{:else if type === 'pick_two'}
-                    <div class="absolute  w-8 h-12 ">
-						<div class={"absolute w-full h-full border border-black p-1 rounded-md card_icon top-2 right-2 "+bg+'_card'}></div>
-						<div class={"absolute w-full h-full border border-black p-1 rounded-md card_icon bottom-2 left-2 "+bg+'_card'}></div>
-					</div>
-                {/if}
+					<img class="w-6 h-6 mt-1 -rotate-[10deg] " src={white_arrows} alt="">
+		 		{:else if type === 'pick_two'}
+            	    +2
+            	{/if}
 			</div>
-			<div class="w-full flex items-start justify-end h-6 pr-1">
-				<div class='text-[20px] text-white font-extrabold the_secondary_number h-6 flex items-start justify-cenetr rotate-180'>
-					{#if type === 'block'}
-						<img class="w-6 h-6 mt-1" src={white_block} alt="">
-					{:else if type === 'change_direction'}
-						<img class="w-6 h-6 mt-1 -rotate-[10deg] " src={white_arrows} alt="">
-			 		{:else if type === 'pick_two'}
-                	    +2
-                	{/if}
+		</div>
+		<div class='bg-white w-full h-3/4  rounded-tr-[60px] rounded-tl-[160px] rounded-br-[160px] rounded-bl-[60px] flex items-center justify-center '>
+			{#if type === 'block'}
+				{#if bg === 'blue'}
+					<img class=" h-20 w-h-20" src={blue_block} alt="">
+				{:else if  bg === 'red'}
+					<img class=" h-20 w-h-20" src={red_block} alt="">
+				{:else if  bg === 'green'}
+					<img class=" h-20 w-h-20" src={green_block} alt="">
+				{:else if  bg === 'yellow'}
+					<img class=" h-20 w-h-20" src={yellow_block} alt="">
+				{/if}
+			{:else if type === 'change_direction'}
+				{#if bg === 'blue'}
+					<img class=" -rotate-[10deg] h-20 w-h-20" src={blue_arrows} alt="">
+				{:else if  bg === 'red'}
+					<img class=" -rotate-[10deg] h-20 w-h-20" src={red_arrows} alt="">
+				{:else if  bg === 'green'}
+					<img class=" -rotate-[10deg] h-20 w-h-20" src={green_arrows} alt="">
+				{:else if  bg === 'yellow'}
+					<img class=" -rotate-[10deg] h-20 w-h-20" src={yellow_arrows} alt="">
+				{/if}
+		 	{:else if type === 'pick_two'}
+                <div class="absolute  w-8 h-12 ">
+					<div class={"absolute w-full h-full border border-black p-1 rounded-md card_icon top-2 right-2 "+bg+'_card'}></div>
+					<div class={"absolute w-full h-full border border-black p-1 rounded-md card_icon bottom-2 left-2 "+bg+'_card'}></div>
 				</div>
+            {/if}
+		</div>
+		<div class="w-full flex items-start justify-end h-6 pr-1">
+			<div class='text-[20px] text-white font-extrabold the_secondary_number h-6 flex items-start justify-cenetr rotate-180'>
+				{#if type === 'block'}
+					<img class="w-6 h-6 mt-1" src={white_block} alt="">
+				{:else if type === 'change_direction'}
+					<img class="w-6 h-6 mt-1 -rotate-[10deg] " src={white_arrows} alt="">
+		 		{:else if type === 'pick_two'}
+            	    +2
+            	{/if}
 			</div>
 		</div>
 	</div>
-
-
 </div>
