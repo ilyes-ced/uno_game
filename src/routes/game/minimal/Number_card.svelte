@@ -3,9 +3,6 @@
     export let  bg: string;
 
 
-	const change = (e) => {
-		e.target.classList.toggle('flip_card')
-	}
 
 </script>
 

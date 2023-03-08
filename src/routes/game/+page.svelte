@@ -64,17 +64,8 @@
 
 
 	<div class='border bg-black w-1/4 h-full' >
-		<div class='h-full w-full bg-red-400'></div>
-	</div>
-
-
-	<div class='border bg-black w-1/2 h-full flex flex-col justify-between items-center ' >
-		<div class='w-full h-48 bg-red-600 border pt-10'>
-
-
-
-			 
-			<div id='my_deck' class=' bg-red-600  flex relative' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
+		<div class='h-full w-full bg-red-400 flex items-center justify-start '>
+			<div id='' class=' bg-green-600  p-24 flex relative -rotate-90' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
 				{#each cards_tempo as card, i}
 			
 					{#if i < cards_tempo.length/2 }
@@ -102,13 +93,51 @@
 				{/each}
 				
 			</div>
+		</div>
+	</div>
+
+
+	<div class='border bg-black w-1/2 h-full flex flex-col justify-between items-center ' >
+		<div class='w-full h-48 bg-red-600 border pt-10 flex items-end justify-center mt-20'>
+
+
+
+			 
+	 		<div id='' class=' bg-white-600    flex relative rotate-180 ' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
+				{#each cards_tempo as card, i}
+			
+					{#if i < cards_tempo.length/2 }
+						{offset = ( cards_tempo.length/2 - i)}
+					{:else }
+						{offset = ( i -  cards_tempo.length/2 +1 )}			 
+					{/if}
+			
+			
+					<div class='absolute '   style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+2))+"px; transform: rotatez("+((i*2) - (cards_tempo.length))+"deg); translate: 0px "+(offset*3)+"px; " } >
+						<div class='black_card  rounded-lg w-32 h-48 cursor-pointer relative flex items-end justify-center' draggable="true" >
+							<div class='absolute w-24 h-16 rounded-[50%] border-4 border-red-600  top-1/2 -translate-y-1/2 -rotate-12  flex items-center justify-center'>
+								<div class='text-[45px]  minimal_uno_text  font-semibold     text-yellow-300 '  >
+									UNO
+								</div>
+							</div>
+							<div class="bg-white h-1 w-full mb-4 flex  ">
+								<div class='h-full w-1/4 bg-red-600' ></div>
+								<div class='h-full w-1/4 bg-green-600' ></div>
+								<div class='h-full w-1/4 bg-blue-600' ></div>
+								<div class='h-full w-1/4 bg-yellow-400' ></div>
+							</div>
+						</div>
+					</div>	
+				{/each}
+				
+			</div>
 
 
 
 
 		</div>	
-		<div class='w-full  bg-red-600 border h-64 '>
-			<div id='my_deck' class=' bg-red-600  flex relative' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
+		<div class='w-full  bg-red-600 borde r h-64 '>
+			<div id='' class=' bg-red-600   flex relative' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
 				{#each cards_tempo as card, i}
 			
 					{#if i < cards_tempo.length/2 }
@@ -137,7 +166,38 @@
 
 	
 	<div class='border bg-black w-1/4 h-full' >
-		<div class='h-full w-full bg-red-400'></div>
+		<div class='h-full w-full bg-red-400'>
+			<div class='h-full w-full bg-red-400 flex items-center justify-start '>
+				<div id='' class=' bg-green-600  p-24 flex relative rotate-90' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
+					{#each cards_tempo as card, i}
+				
+						{#if i < cards_tempo.length/2 }
+							{offset = ( cards_tempo.length/2 - i)}
+						{:else }
+							{offset = ( i -  cards_tempo.length/2 +1 )}			 
+						{/if}
+				
+				
+						<div class='absolute '   style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+2))+"px; transform: rotatez(-"+((i*2) - (cards_tempo.length))+"deg); translate: 0px -"+(offset*3)+"px; " } >
+							<div class='black_card  rounded-lg w-32 h-48 cursor-pointer relative flex items-end justify-center' draggable="true" >
+								<div class='absolute w-24 h-16 rounded-[50%] border-4 border-red-600  top-1/2 -translate-y-1/2 -rotate-12  flex items-center justify-center'>
+									<div class='text-[45px]  minimal_uno_text  font-semibold     text-yellow-300 '  >
+										UNO
+									</div>
+								</div>
+								<div class="bg-white h-1 w-full mb-4 flex  ">
+									<div class='h-full w-1/4 bg-red-600' ></div>
+									<div class='h-full w-1/4 bg-green-600' ></div>
+									<div class='h-full w-1/4 bg-blue-600' ></div>
+									<div class='h-full w-1/4 bg-yellow-400' ></div>
+								</div>
+							</div>
+						</div>	
+					{/each}
+					
+				</div>
+			</div>
+		</div>
 	</div>
 
 
