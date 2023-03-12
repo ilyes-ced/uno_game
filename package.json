@@ -35,7 +35,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-node": "^1.2.2",
 		"autoprefixer": "^10.4.13",
+		"express": "^4.18.2",
 		"postcss": "^8.4.21",
 		"socket.io": "^4.6.1",
 		"socket.io-client": "^4.6.1",

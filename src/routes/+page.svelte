@@ -1,11 +1,11 @@
 <script lang='ts'>
 
-import { io } from 'socket.io-client'
+	//import { io } from 'socket.io-client'
 
-const socket = io()
-socket.on('eventFromServer', (message) => {
-    alert(message)
-  })
+	//const socket = io()
+	//socket.on('eventFromServer', (message) => {
+	//	alert(message)
+	//})
 
 
 
