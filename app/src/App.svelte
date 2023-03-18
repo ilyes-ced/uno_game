@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Router from 'svelte-spa-router'
-
+    import Router from 'svelte-spa-router'
+    import "./styles.css";
 
     import Home from './routes/Home_page.svelte'
     import Game from './routes/Game.svelte'
