@@ -6,13 +6,13 @@
     import Game from './routes/Game.svelte'
     import Not_found from './routes/404.svelte'
 
-const routes = {
-    '/': Home,
-    '/game': Game,
-    '*': Not_found,
-}
-
-
+    const routes = {
+        '/': Home,
+        '/game': Game,
+        '*': Not_found,
+    }
+    
+    
 
 </script>
 
