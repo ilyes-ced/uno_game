@@ -1,5 +1,19 @@
 <script lang="ts">
-  import Greet from './lib/Greet.svelte'
+  import Router from 'svelte-spa-router'
+
+
+    import Home from './routes/Home_page.svelte'
+    import Game from './routes/Game.svelte'
+    import Not_found from './routes/404.svelte'
+
+const routes = {
+    '/': Home,
+    '/game': Game,
+    '*': Not_found,
+}
+
+
+
 </script>
 
 <main class="container">
@@ -21,9 +35,19 @@
     Click on the Tauri, Vite, and Svelte logos to learn more.
   </p>
 
+
   <div class="row">
-    <Greet />
-  </div>
+    hello
+
+        <Router {routes}/>
+
+
+
+        <a href="#/">fefefef</a>
+        <a href="#/game">fefefef</a>
+        <a href="#/fze">00</a>
+    
+    </div>
 
 
 </main>
