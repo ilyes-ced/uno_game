@@ -6,6 +6,7 @@
     import Arrow_block from './minimal/Arrow_block.svelte';
     import Fours from './minimal/Fours.svelte';
     import Colored_card from './minimal/Colored_card.svelte';
+    import Back from './minimal/Back.svelte';
     const green_bg = 'green'
     const red_bg = 'red'
     const yellow_bg = 'yellow'
@@ -44,6 +45,41 @@
         e.target.classList.remove('raised')
     }
 
+	import { onMount } from 'svelte';
+
+	let time = new Date();
+
+	// these automatically update when `time`
+	// changes, because of the `$:` prefix
+	$: hours = time.getHours();
+	$: minutes = time.getMinutes();
+	$: seconds = time.getSeconds();
+
+    let socket
+
+	onMount(() => {
+		const interval = setInterval(() => {
+			time = new Date();
+		}, 1000);
+
+
+        socket = new WebSocket("ws://localhost:8080/ws/")
+        socket.addEventListener("open", ()=> {
+            console.log("Opened")
+	    });
+
+
+
+		return () => {
+			clearInterval(interval);
+		};
+
+
+
+  
+  
+  
+  })
 
 </script>
 
@@ -52,59 +88,71 @@
 
 
 <div class='bg-gray-700  w-full flex items-center justify-between grow'>
-
+    {hours + ':'+minutes+':'+seconds}
 
 
 
     <div class="w-full h-full flex">  
         <div class='w-1/2 h-full border flex items-center justify-center ' >
+            <!--  LEFT  -->
             <div class='w-2/3 h-2/3 bg-red-600'>
 
             </div>
         </div>
         <div class='w-full h-full border flex flex-col' >
+            <!--  TOP  -->
             <div class='w-full h-2/3 border flex items-center justify-center' >
                 <div class='w-2/3 h-full bg-red-600'>
 
                 </div>
             </div>
+            <!--  CENTER  -->
             <div class='w-full h-full border flex items-center justify-center' >
                 <div class='w-64 h-48 bg-green-500   rounded-lg flex'>
                     <Number_card number={5} bg={'yellow'}   />
                     <Number_card number={5} bg={'yellow'}   />
                 </div>
             </div>
+            <!--  BOTTOM  -->
             <div class='w-full h-2/3 border flex items-center justify-center     ' >
-                <div class='w-2/3 h-full bg-black '>
-                    <div id='' class='flex relative' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
+                <div class='w-2/3 h-full bg-black  flex items-start justify-center'>
+                    <div id='' class='flex relative ' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
                         {#each cards_tempo as card, i}
                         
-                        {#if i < cards_tempo.length/2 }
-                        {offset = ( cards_tempo.length/2 - i)}
-                        {:else }
-                        {offset = ( i -  cards_tempo.length/2 +1 )}			 
-                        {/if}
-                        
-                        
-                        <div class='absolute transition-all ease-in-out duration-300 top-full ' on:mouseover={raise} on:focus={raise} on:mouseleave={reset}  style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
-                                {#if card.type === 'number'}
-                                <Number_card number={card.value} bg={card.color}   />
-                                {:else if card.type === 'change_direction' || card.type === 'block' || card.type === 'pick_two'}
-                                <Arrow_block type={card.type} bg={card.color}   />
-                                {:else if card.type === 'pick_four'}
-                                <Fours type={card.type} bg={card.color}   />
-                                {:else if card.type === 'change_color'}
-                                <Colored_card type={card.type} bg={card.color} is_blank={card.is_blank}  />
-                                {/if}
+                 
+
+
+                            <div class='absolute transition-all ease-in-out duration-300 top-full '  style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
+                                    {#if card.type === 'number'}
+                                        <Number_card number={card.value} bg={card.color}   />
+                                    {:else if card.type === 'change_direction' || card.type === 'block' || card.type === 'pick_two'}
+                                        <Arrow_block type={card.type} bg={card.color}   />
+                                    {:else if card.type === 'pick_four'}
+                                        <Fours type={card.type} bg={card.color}   />
+                                    {:else if card.type === 'change_color'}
+                                        <Colored_card type={card.type} bg={card.color} is_blank={card.is_blank}  />
+                                    {/if}
                             </div>	
-                            {/each}
-                        </div>
+                        {/each}
+                    </div>
                 </div>
             </div>
         </div>
+        <!--  RIGHT  -->
         <div class='w-1/2 h-full border flex items-center justify-center ' >
             <div class='w-2/3 h-2/3 bg-red-600'>
+                <div class='w-2/3 h-full bg-black '>
+                    <div id='' class='flex relative rotate-90'  style={ 'width: '+(cards_tempo.length*40)+'px	' } >
+                        {#each cards_tempo as card, i}
+                        
+  
 
+                            <div class='absolute transition-all ease-in-out duration-300 top-full '   style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
+                                <Back />
+                            </div>	
+                        {/each}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
