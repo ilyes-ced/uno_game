@@ -74,9 +74,31 @@
                     <Number_card number={5} bg={'yellow'}   />
                 </div>
             </div>
-            <div class='w-full h-2/3 border flex items-center justify-center' >
-                <div class='w-2/3 h-full bg-red-600'>
-
+            <div class='w-full h-2/3 border flex items-center justify-center     ' >
+                <div class='w-2/3 h-full bg-black '>
+                    <div id='' class='flex relative' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
+                        {#each cards_tempo as card, i}
+                        
+                        {#if i < cards_tempo.length/2 }
+                        {offset = ( cards_tempo.length/2 - i)}
+                        {:else }
+                        {offset = ( i -  cards_tempo.length/2 +1 )}			 
+                        {/if}
+                        
+                        
+                        <div class='absolute transition-all ease-in-out duration-300 top-full ' on:mouseover={raise} on:focus={raise} on:mouseleave={reset}  style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
+                                {#if card.type === 'number'}
+                                <Number_card number={card.value} bg={card.color}   />
+                                {:else if card.type === 'change_direction' || card.type === 'block' || card.type === 'pick_two'}
+                                <Arrow_block type={card.type} bg={card.color}   />
+                                {:else if card.type === 'pick_four'}
+                                <Fours type={card.type} bg={card.color}   />
+                                {:else if card.type === 'change_color'}
+                                <Colored_card type={card.type} bg={card.color} is_blank={card.is_blank}  />
+                                {/if}
+                            </div>	
+                            {/each}
+                        </div>
                 </div>
             </div>
         </div>
@@ -91,7 +113,7 @@
 
 <!--
     
-    <div class='w-full  bg-red-600 borde r h-64 '>
+    <div class='w-full  bg-red-600 border h-64 '>
         <div id='' class=' bg-red-600   flex relative' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
             {#each cards_tempo as card, i}
             
