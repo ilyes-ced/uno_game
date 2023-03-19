@@ -3,8 +3,8 @@
     export let  bg: string;
 
 
-	import block from '$lib/images/white_block.svg';
-    import arrows from '$lib/images/white_arrows.svg';
+	//import block from '$lib/images/white_block.svg';
+    //import arrows from '$lib/images/white_arrows.svg';
 
 /**
  * 

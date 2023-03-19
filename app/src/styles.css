@@ -4,8 +4,12 @@
 
 
 
-body{
-  background-color: rgb(50 04 10)
+body, html{
+    background-color: rgb(50 04 10);
+	height: 100%;
+	width: 100%;
+
+	background-color: blue;
 }
 
 
