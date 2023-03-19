@@ -40,7 +40,7 @@
       {
         "fullscreen": false,
         "resizable": true,
-        "title": "app",
+        "title": "my first tauri appuno game",
         "width": 800,
         "height": 600
       }

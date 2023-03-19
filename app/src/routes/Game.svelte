@@ -15,9 +15,9 @@
             </div>
             <div class=' w-full h-3/4  flex items-center justify-center'>
                 <div class='w-16 h-16 rounded-[50%] aspect-square  grid grid-cols-2 gap-[2px]'>
-                        <div class='border-t-2 border-l-2 h-full w-full rounded-tl-full border-green-400 ' ></div>
-                        <div class='border-t-2 border-r-2 h-full w-full rounded-tr-full border-pink-600' ></div>
-                        <div class='border-b-2 border-l-2 h-full w-full rounded-bl-full border-purple-600' ></div>
+                        <div class='border-t-2 border-l-2 h-full w-full rounded-tl-full border-green-600 ' ></div>
+                        <div class='border-t-2 border-r-2 h-full w-full rounded-tr-full border-red-600' ></div>
+                        <div class='border-b-2 border-l-2 h-full w-full rounded-bl-full border-blue-600' ></div>
                         <div class='border-b-2 border-r-2 h-full w-full rounded-br-full border-yellow-400' ></div>
                 </div>
             </div>
