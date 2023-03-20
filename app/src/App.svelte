@@ -20,7 +20,7 @@
 
 
 
-<div class="w-full h-full flex flex-col">
+<div class="w-full h-full flex flex-col bg-[#130e29] text-gray-400 ">
     <Header />
     <Router {routes}/>
 </div>

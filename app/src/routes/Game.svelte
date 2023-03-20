@@ -80,19 +80,34 @@
             //var rect = center_box.getBoundingClientRect();
             //console.log(rect.top, rect.right, rect.bottom, rect.left);
 //
-            //console.log(e.target.getBoundingClientRect())
-            //console.log(e.target.style.translate)
-            //e.target.style.top = 0
-            //e.target.style.left = 0
-            //e.target.style.top = rect.top
-            //e.target.style.left = rect.left
-            //console.log(e.target.getBoundingClientRect())
-
+//console.log(e.target.style.translate)
+//e.target.style.top = 0
+//e.target.style.left = 0
+//e.target.style.top = rect.top
+//e.target.style.left = rect.left
+//console.log(e.target.getBoundingClientRect())
 
             let new_element = e.target.cloneNode(true);
             console.log(new_element)
+
+
+            var rect = e.target.getBoundingClientRect();
+            console.log(rect.top, rect.right, rect.bottom, rect.left);
             
+            center_box.firstChild.nextSibling.remove()
+            new_element.style.backgroundColor = 'red'
+            console.log('++++++++++++++++++++++++', rect.top, rect.left)
+            new_element.style.position = 'absolute'
+            new_element.style.top = rect.top
+            new_element.style.left = rect.left
+            console.log( new_element.getBoundingClientRect())
+            center_box.firstChild.appendChild(new_element)
+
+
+
             center_box_cards = [...center_box_cards, cards_tempo[e.target.id]]
+            cards_tempo.splice(e.target.id, 1)
+            cards_tempo = [...cards_tempo]
             console.log(center_box_cards)
         }
 
