@@ -1,13 +1,12 @@
 <script lang="ts">
-    export let  bg: string;
 
 </script>
 
 
 
 
-<div class='black_card p-1 rounded-lg w-32 h-48 cursor-pointer' draggable="true" >
-	<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center pointer-events-none  '}>
+<div class='black_card p-1 rounded-lg w-32 h-48 cursor-pointer pointer-events-none '  >
+	<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  '}>
 		<div class="w-full flex items-start justify-start h-6 pl-1">
 			<div class='text-[20px] text-white   h-6 flex items-start justify-cenetr'>
 				+4

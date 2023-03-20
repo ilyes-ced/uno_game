@@ -72,10 +72,7 @@
 		};
 
 
-
-  
-  
-  })
+    })
         const test = (e) => {
             //console.log('hello')
             //console.log(center_box)
@@ -94,9 +91,14 @@
 
             let new_element = e.target.cloneNode(true);
             console.log(new_element)
-            center_box_cards.push(cards_tempo[e.target.id])
+            
+            center_box_cards = [...center_box_cards, cards_tempo[e.target.id]]
             console.log(center_box_cards)
         }
+
+        let last_card
+        $: last_card = center_box_cards[center_box_cards.length-1]
+  
 
 </script>
 
@@ -142,18 +144,17 @@
             <!--  CENTER  -->
             <div class='w-full h-full border flex items-center justify-center' >
                 <div class='w-64 h-48 bg-green-500   rounded-lg flex ' bind:this={center_box}>
-                    {#each center_box_cards as card, i}
-                        {i}
-                        {#if card.type === 'number'}
-                            <Number_card number={card.value} bg={card.color}   />
-                        {:else if card.type === 'change_direction' || card.type === 'block' || card.type === 'pick_two'}
-                            <Arrow_block type={card.type} bg={card.color}   />
-                        {:else if card.type === 'pick_four'}
-                            <Fours type={card.type} bg={card.color}   />
-                        {:else if card.type === 'change_color'}
-                            <Colored_card type={card.type} bg={card.color} is_blank={card.is_blank}  />
-                        {/if}
-                    {/each}
+                    <Back />
+                    {#if last_card.type === 'number'}
+                        <Number_card number={last_card.value} bg={last_card.color}   />
+                    {:else if last_card.type === 'change_direction' || last_card.type === 'block' || last_card.type === 'pick_two'}
+                        <Arrow_block type={last_card.type} bg={last_card.color}   />
+                    {:else if last_card.type === 'pick_four'}
+                        <Fours type={last_card.type} bg={last_card.color}   />
+                    {:else if last_card.type === 'change_color'}
+                        <Colored_card type={last_card.type} bg={last_card.color} is_blank={last_card.is_blank}  />
+                    {/if}
+                    
                 </div>
             </div>
             <!--  BOTTOM  -->

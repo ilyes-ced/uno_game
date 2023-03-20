@@ -7,8 +7,8 @@
 
 
 
-<div class={' p-1 rounded-lg w-32 h-48 cursor-pointer black_card'  } draggable="true" >
-	<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center  pointer-events-none  '}>
+<div class={' p-1 rounded-lg w-32 h-48 cursor-pointer black_card pointer-events-none '  }  >
+	<div class={'w-full h-full  rounded-lg  flex flex-col items-center justify-center    '}>
 		<div class="w-full flex items-start justify-start h-6 p-1 ">
 			<div class='w-6 h-6 rounded-[50%] aspect-square  grid grid-cols-2 gap-[2px]'>
                 <div class='border-t-2 border-l-2 h-full w-full rounded-tl-full border-green-600 ' ></div>
