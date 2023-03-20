@@ -1,62 +1,37 @@
-//use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
-//
-//mod handlers;
-//
-//#[actix_web::main]
-//async fn main() -> std::io::Result<()> {
-//    HttpServer::new(|| {
-//        App::new()
-//            .service(handlers::hello)
-//            .service(handlers::echo)
-//            .service(
-//                // prefixes all resources and routes attached to it...
-//                web::scope("/app")
-//                    // ...so this handles requests for `GET /app/index.html`
-//                    .route("/", web::get().to(handlers::index)),
-//            )
-//
-//            .route("/hey", web::get().to(handlers::manual_hello))
-//    })
-//    .bind(("127.0.0.1", 5000))?
-//    .run()
-//    .await
-//}
+use tokio::io::AsyncBufReadExt;
+use tokio::net::TcpListener;
+use tokio::io::AsyncWriteExt;
+use tokio::io::BufReader;
 
 
 
-use actix::{Actor, StreamHandler};
-use actix_web::{web, App, Error, HttpRequest, HttpResponse, HttpServer};
-use actix_web_actors::ws;
 
-/// Define HTTP actor
-struct MyWs;
+#[tokio::main]
+async fn main() {
+    println!("hello");
 
-impl Actor for MyWs {
-    type Context = ws::WebsocketContext<Self>;
-}
+    let listener: TcpListener = TcpListener::bind("localhost:5000").await.unwrap();
 
-/// Handler for ws::Message message
-impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for MyWs {
-    fn handle(&mut self, msg: Result<ws::Message, ws::ProtocolError>, ctx: &mut Self::Context) {
-        match msg {
-            Ok(ws::Message::Ping(msg)) => ctx.pong(&msg),
-            Ok(ws::Message::Text(text)) => ctx.text(text),
-            Ok(ws::Message::Binary(bin)) => ctx.binary(bin),
-            _ => (),
+    let (mut socket, addr) = listener.accept().await.unwrap();
+    println!("user address: {}",addr);
+
+    let (reader, mut writer) = socket.split();
+
+    let mut reader = BufReader::new(reader);
+    let mut line = String::new();
+
+    loop {
+        let bytes_read = reader.read_line(&mut line).await.unwrap(); 
+        if bytes_read == 0 {
+            break;
         }
+        writer.write_all(&line.as_bytes()).await.unwrap();
+        line.clear();
     }
-}
+   
 
-async fn index(req: HttpRequest, stream: web::Payload) -> Result<HttpResponse, Error> {
-    let resp = ws::start(MyWs {}, &req, stream);
-    println!("{:?}", resp);
-    resp
-}
 
-#[actix_web::main]
-async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().route("/ws/", web::get().to(index)))
-        .bind(("127.0.0.1", 8080))?
-        .run()
-        .await
+
+
+
 }
