@@ -1,7 +1,7 @@
 <div class="h-full w-fit bg-[#100a29] mx-auto">
 
     <div>
-        <img src="" alt="dd">
+        <img src="../../../../../lib/images/uno_game.jpg" alt="dd">
     </div>
 
     <div class='w-full bg-red-900 flex space-x-24 px-24'>

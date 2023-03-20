@@ -1,5 +1,10 @@
 <script lang='ts'>
 
+    import Number_card1 from './routes/minimal/Number_card.svelte';
+    import Number_card2 from './routes/deck1/Number_card.svelte';
+    import Number_card3 from './routes/deck2/Number_card.svelte';
+
+
     let show_theme_modal = false
 
     const toggle_theme_modal = () => {
@@ -9,7 +14,7 @@
 
 </script>
 
-<div class="h-[50px] bg-[rgba(0,0,0,0.4)] flex items-center justify-between px-6 ">
+<div class="h-12 bg-[rgba(0,0,0,0.4)] flex items-center justify-between px-6 ">
 
 
 
@@ -26,6 +31,7 @@
         </div>
     </div>
 
+    
     <div>
         <div class='flex items-center space-x-2 cursor-pointer' on:click={toggle_theme_modal}>
             <p>
@@ -39,6 +45,16 @@
 
 
     {#if show_theme_modal}
-        <div class="absolute top-12 right-12 rounded-lg border-4 border-[#100a29] bg-red-600 h-12 w-12"></div>
+        <div class=" top-12 right-6 rounded-lg border-4 border-[#100a29]  bg-[#28233f] absolute  grid grid-cols-2 gap-4 p-4">
+            <div class='bg-[#130e29] rounded-lg p-6 border-4 border-[#100a29] cursor-pointer'>
+                <Number_card1  number={5} bg={'blue'} />
+            </div>
+            <div class='bg-[#130e29] rounded-lg p-6 border-4 border-[#100a29] cursor-pointer'>
+                <Number_card2  number={5} bg={'blue'} />
+            </div>
+            <div class='bg-[#130e29] rounded-lg p-6 border-4 border-[#100a29] cursor-pointer'>
+                <Number_card3  number={5} bg={'blue'} />
+            </div>
+        </div>
     {/if}
 </div>
