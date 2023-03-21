@@ -246,3 +246,21 @@ user-select: none; /* Standard */
 .raised{
   translate: 0px -100px;
 }
+
+
+
+
+#game_board_back{
+  
+  background: radial-gradient(
+  closest-side circle at center,
+  #100a29 20%,
+  #130e29 30%,
+  transparent 90%
+);
+filter: blur(5px);
+}
+
+
+
+

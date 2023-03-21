@@ -60,7 +60,7 @@
 		}, 1000);
 
 
-        socket = new WebSocket("ws://localhost:8080/ws/")
+        socket = new WebSocket("ws:/localhost:5000/")
         socket.addEventListener("open", ()=> {
             console.log("Opened")
 	    });
@@ -121,18 +121,18 @@
 
 
 
-<div class='bg-gray-700  w-full flex items-center justify-between grow'>
+<div class='  w-full flex items-center justify-between grow'>
     <div class="absolute ">
         {hours + ':'+minutes+':'+seconds}
         
     </div>
 
-
-    <div class="w-full h-full flex">  
+    <div id='game_board_back' class='absolute bottom-0 left-0  w-full h-full'></div>
+    <div class="w-full h-full flex  " id='game_board'>  
         <!--  LEFT  -->
-        <div class='w-1/4 h-full border flex items-center justify-center ' >
-            <div class='w-2/3 h-2/3 bg-red-600  flex items-center justify-center'>
-                <div class='w-2/3 h-full bg-black flex items-center justify-center '>
+        <div class='w-1/4 h-full  flex items-center justify-center ' >
+            <div class='w-2/3 h-2/3  flex items-center justify-center'>
+                <div class='w-2/3 h-full  flex items-center justify-center '>
                     <div id='' class='flex relative bg-green-600 w-full'  style={ 'height: '+(cards_tempo.length*40)+'px	' } >
                         {#each cards_tempo as card, i}
                             <div class='absolute transition-all ease-in-out duration-300 -rotate-90  left-1/2 -translate-x-1/2 '   style={"top: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
@@ -143,10 +143,10 @@
                 </div>
             </div>
         </div>
-        <div class='w-1/2 h-full border flex flex-col' >
+        <div class='w-1/2 h-full  flex flex-col' >
             <!--  TOP  -->
-            <div class='w-full h-2/3 border flex items-center justify-center     ' >
-                <div class='w-full h-full bg-black  flex items-start justify-center'>
+            <div class='w-full h-2/3  flex items-center justify-center     ' >
+                <div class='w-full h-full   flex items-start justify-center'>
                     <div id='' class='flex relative h-full   ' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
                         {#each cards_tempo as card, i}
                             <div class='absolute transition-all ease-in-out duration-300 top-1/2 -translate-y-1/2  '   style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
@@ -157,7 +157,7 @@
                 </div>
             </div>
             <!--  CENTER  -->
-            <div class='w-full h-full border flex items-center justify-center' >
+            <div class='w-full h-full  flex items-center justify-center' >
                 <div class='w-64 h-48 bg-green-500   rounded-lg flex ' bind:this={center_box}>
                     <Back />
                     {#if last_card.type === 'number'}
@@ -173,8 +173,8 @@
                 </div>
             </div>
             <!--  BOTTOM  -->
-            <div class='w-full h-2/3 border flex items-center justify-center     ' >
-                <div class='w-full h-full bg-black  flex items-start justify-center'>
+            <div class='w-full h-2/3  flex items-center justify-center     ' >
+                <div class='w-full h-full   flex items-start justify-center'>
                     <div id='' class='flex relative h-full bg-green-600  ' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
                         {#each cards_tempo as card, i}
                             <div id={i+''} class='absolute transition-all ease-in-out duration-300  top-1/2 -translate-y-1/2 cursor-pointer' style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} on:click={test} on:keydown={()=>{console.log('idk why')}} >
@@ -194,9 +194,9 @@
             </div>
         </div>
         <!--  RIGHT  -->
-        <div class='w-1/4 h-full border flex items-center justify-center ' >
-            <div class='w-2/3 h-2/3 bg-red-600  flex items-center justify-center'>
-                <div class='w-2/3 h-full bg-black flex items-center justify-center '>
+        <div class='w-1/4 h-full  flex items-center justify-center ' >
+            <div class='w-2/3 h-2/3  flex items-center justify-center'>
+                <div class='w-2/3 h-full  flex items-center justify-center '>
                     <div id='' class='flex relative bg-green-600 w-full '  style={ 'height: '+(cards_tempo.length*40)+'px	' } >
                         {#each cards_tempo as card, i}
                             <div class='absolute transition-all ease-in-out duration-300 rotate-90  left-1/2 -translate-x-1/2 '   style={"top: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
@@ -213,8 +213,8 @@
 
 <!--
     
-    <div class='w-full  bg-red-600 border h-64 '>
-        <div id='' class=' bg-red-600   flex relative' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
+    <div class='w-full  border h-64 '>
+        <div id='' class='   flex relative' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
             {#each cards_tempo as card, i}
             
             {#if i < cards_tempo.length/2 }
