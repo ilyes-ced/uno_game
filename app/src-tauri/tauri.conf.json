@@ -4,7 +4,7 @@
     "beforeBuildCommand": "pnpm build",
     "devPath": "http://localhost:1420",
     "distDir": "../dist",
-    "withGlobalTauri": false
+    "withGlobalTauri": true
   },
   "package": {
     "productName": "app",
@@ -16,6 +16,10 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "fs": {
+        "all": false,
+        "readFile": true
       }
     },
     "bundle": {
@@ -31,7 +35,7 @@
       "targets": "all"
     },
     "security": {
-      "csp": null
+      "csp": "default-src: 'self'; media-src 'self' asset:"
     },
     "updater": {
       "active": false
