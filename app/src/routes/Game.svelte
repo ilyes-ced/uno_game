@@ -59,11 +59,30 @@
 			time = new Date();
 		}, 1000);
 
-
-        socket = new WebSocket("ws:/localhost:5000/")
+        console.log('ggggggggggggggggggggggggggggggggggggggggggggggg')
+        socket = new WebSocket("ws://localhost:5000")
         socket.addEventListener("open", ()=> {
             console.log("Opened")
 	    });
+
+        const interval2 = setInterval(() => {
+            socket.send(time)
+		}, 1000);
+        socket.onmessage = (ev) => {
+          console.log('Received: ' + ev.data, 'message')
+        }
+
+        socket.onopen = () => {
+          console.log('Connected')
+        }
+
+        socket.onmessage = (ev) => {
+          console.log('Received: ' + ev.data, 'message')
+        }
+
+        socket.onclose = () => {
+          console.log('Disconnected')
+        }
 
 
 

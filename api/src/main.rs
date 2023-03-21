@@ -1,6 +1,5 @@
-use std::time::{Duration, Instant};
-use actix::Running;
-use actix_web::{middleware::Logger, web, App, Error, HttpRequest, HttpServer, Responder, get, post, HttpResponse};
+use actix::{Actor, StreamHandler};
+use actix_web::{web, App, Error, HttpRequest, HttpServer, Responder, get, post, HttpResponse};
 use actix_web_actors::ws;
 
 mod server;
@@ -9,117 +8,112 @@ mod handlers;
 
 struct WsChatSession {
     id: usize,
-    hb: Instant,
     room: String,
-    name: Option<String>,
-    //addr: Addr<server::ChatServer>,
+    name: String,
 }
 
 
 
-async fn chat_route(
-    req: HttpRequest,
-    stream: web::Payload,
-    //srv: web::Data<Addr<server::ChatServer>>,
-) -> Result<impl Responder, Error> {
-    ws::start(
-        WsChatSession {
-            id: 0,
-            hb: Instant::now(),
-            room: "main".to_owned(),
-            name: None,
-            //addr: srv.get_ref().clone(),
-        },
-        &req,
-        stream,
-    )
+impl Actor for WsChatSession {
+    type Context = ws::WebsocketContext<Self>;
 }
 
 
-impl WsChatSession {
-    fn hb(&self, ctx: &mut ws::WebsocketContext<Self>) {
-        ctx.run_interval(Duration::from_secs(5), |act, ctx| {
-            if Instant::now().duration_since(act.hb) > Duration::from_secs(10) {
-                println!("Websocket Client heartbeat failed, disconnecting!");
-                //act.addr.do_send(server::Disconnect { id: act.id });
-                ctx.stop();
-                return;
-            }
 
-            ctx.ping(b"");
-        });
+//                            _             _                                                                     _                           _   _               
+//       ___    ___     ___  | | __   ___  | |_     _ __ ___     ___   ___   ___    __ _    __ _    ___   ___    | |__     __ _   _ __     __| | | |   ___   _ __ 
+//      / __|  / _ \   / __| | |/ /  / _ \ | __|   | '_ ` _ \   / _ \ / __| / __|  / _` |  / _` |  / _ \ / __|   | '_ \   / _` | | '_ \   / _` | | |  / _ \ | '__|
+//      \__ \ | (_) | | (__  |   <  |  __/ | |_    | | | | | | |  __/ \__ \ \__ \ | (_| | | (_| | |  __/ \__ \   | | | | | (_| | | | | | | (_| | | | |  __/ | |   
+//      |___/  \___/   \___| |_|\_\  \___|  \__|   |_| |_| |_|  \___| |___/ |___/  \__,_|  \__, |  \___| |___/   |_| |_|  \__,_| |_| |_|  \__,_| |_|  \___| |_|   
+//                                                                                          |___/
+
+//                                     888               888                                                                                         888                             888 888                  
+//                                     888               888                                                                                         888                             888 888                  
+//                                     888               888                                                                                         888                             888 888                  
+//          .d8888b   .d88b.   .d8888b 888  888  .d88b.  888888     88888b.d88b.   .d88b.  .d8888b  .d8888b   8888b.   .d88b.   .d88b.  .d8888b      88888b.   8888b.  88888b.   .d88888 888  .d88b.  888d888 
+//          88K      d88""88b d88P"    888 .88P d8P  Y8b 888        888 "888 "88b d8P  Y8b 88K      88K          "88b d88P"88b d8P  Y8b 88K          888 "88b     "88b 888 "88b d88" 888 888 d8P  Y8b 888P"   
+//          "Y8888b. 888  888 888      888888K  88888888 888        888  888  888 88888888 "Y8888b. "Y8888b. .d888888 888  888 88888888 "Y8888b.     888  888 .d888888 888  888 888  888 888 88888888 888     
+//               X88 Y88..88P Y88b.    888 "88b Y8b.     Y88b.      888  888  888 Y8b.          X88      X88 888  888 Y88b 888 Y8b.          X88     888  888 888  888 888  888 Y88b 888 888 Y8b.     888     
+//           88888P'  "Y88P"   "Y8888P 888  888  "Y8888   "Y888     888  888  888  "Y8888   88888P'  88888P' "Y888888  "Y88888  "Y8888   88888P'     888  888 "Y888888 888  888  "Y88888 888  "Y8888  888     
+//                                                                                                                         888                                                                                
+//                                                                                                                    Y8b d88P                                                                                
+//                                                                                                                     "Y88P"                                                                                 
+//                                              
+//        ..%%%%....%%%%....%%%%...%%..%%..%%%%%%..%%%%%%..........%%...%%..%%%%%%...%%%%....%%%%....%%%%....%%%%...%%%%%%...%%%%...........%%..%%...%%%%...%%..%%..%%%%%...%%......%%%%%%..%%%%%..
+//        .%%......%%..%%..%%..%%..%%.%%...%%........%%............%%%.%%%..%%......%%......%%......%%..%%..%%......%%......%%..............%%..%%..%%..%%..%%%.%%..%%..%%..%%......%%......%%..%%.
+//        ..%%%%...%%..%%..%%......%%%%....%%%%......%%............%%.%.%%..%%%%.....%%%%....%%%%...%%%%%%..%%.%%%..%%%%.....%%%%...........%%%%%%..%%%%%%..%%.%%%..%%..%%..%%......%%%%....%%%%%..
+//        .....%%..%%..%%..%%..%%..%%.%%...%%........%%............%%...%%..%%..........%%......%%..%%..%%..%%..%%..%%..........%%..........%%..%%..%%..%%..%%..%%..%%..%%..%%......%%......%%..%%.
+//        ..%%%%....%%%%....%%%%...%%..%%..%%%%%%....%%............%%...%%..%%%%%%...%%%%....%%%%...%%..%%...%%%%...%%%%%%...%%%%...........%%..%%..%%..%%..%%..%%..%%%%%...%%%%%%..%%%%%%..%%..%%.
+//        
+//                            _             _                                                                     _                           _   _               
+//       ___    ___     ___  | | __   ___  | |_     _ __ ___     ___   ___   ___    __ _    __ _    ___   ___    | |__     __ _   _ __     __| | | |   ___   _ __ 
+//      / __|  / _ \   / __| | |/ /  / _ \ | __|   | '_ ` _ \   / _ \ / __| / __|  / _` |  / _` |  / _ \ / __|   | '_ \   / _` | | '_ \   / _` | | |  / _ \ | '__|
+//      \__ \ | (_) | | (__  |   <  |  __/ | |_    | | | | | | |  __/ \__ \ \__ \ | (_| | | (_| | |  __/ \__ \   | | | | | (_| | | | | | | (_| | | | |  __/ | |   
+//      |___/  \___/   \___| |_|\_\  \___|  \__|   |_| |_| |_|  \___| |___/ |___/  \__,_|  \__, |  \___| |___/   |_| |_|  \__,_| |_| |_|  \__,_| |_|  \___| |_|   
+//                                                                     __/ |                                                                 
+//                                                                    |___/                                                                  
+//                                                                                                                                                              
+
+
+
+
+
+impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WsChatSession {
+    fn handle(&mut self, msg: Result<ws::Message, ws::ProtocolError>, ctx: &mut Self::Context) {
+        match msg {
+            Ok(ws::Message::Ping(msg)) => {
+                println!("hhelloooo1");
+                ctx.pong(&msg);
+            },
+            Ok(ws::Message::Pong(msg)) => {
+                println!("hhelloooo1 from pong");
+                ctx.pong(&msg);
+            },
+            //                        _                                  _   _                  _                                                           
+            //   _ __    ___    ___  (_)   ___  __   __   ___      ___  | | (_)   ___   _ __   | |_     _ __ ___     ___   ___   ___    __ _    __ _    ___ 
+            //  | '__|  / _ \  / __| | |  / _ \ \ \ / /  / _ \    / __| | | | |  / _ \ | '_ \  | __|   | '_ ` _ \   / _ \ / __| / __|  / _` |  / _` |  / _ \
+            //  | |    |  __/ | (__  | | |  __/  \ V /  |  __/   | (__  | | | | |  __/ | | | | | |_    | | | | | | |  __/ \__ \ \__ \ | (_| | | (_| | |  __/
+            //  |_|     \___|  \___| |_|  \___|   \_/    \___|    \___| |_| |_|  \___| |_| |_|  \__|   |_| |_| |_|  \___| |___/ |___/  \__,_|  \__, |  \___|
+            //                                                                                                                                 |___/        
+            Ok(ws::Message::Text(text)) => {
+                println!("{}", text);
+                ctx.text(text);
+            },
+            Ok(ws::Message::Binary(bin)) => {
+                println!("hhelloooo3");
+                ctx.binary(bin);
+            },
+            _ => (),
+        }
     }
 }
 
-//impl Actor for WsChatSession {
-//    type Context = ws::WebsocketContext<Self>;
-//
-//    /// Method is called on actor start.
-//    /// We register ws session with ChatServer
-//    fn started(&mut self, ctx: &mut Self::Context) {
-//        // we'll start heartbeat process on session start.
-//        self.hb(ctx);
-//
-//        // register self in chat server. `AsyncContext::wait` register
-//        // future within context, but context waits until this future resolves
-//        // before processing any other events.
-//        // HttpContext::state() is instance of WsChatSessionState, state is shared
-//        // across all routes within application
-//        let addr = ctx.address();
-//        println!("{:?}", addr);
-//
-//        //self.addr
-//        //    .send(server::Connect {
-//        //        addr: addr.recipient(),
-//        //    })
-//        //    .into_actor(self)
-//        //    .then(|res, act, ctx| {
-//        //        match res {
-//        //            Ok(res) => act.id = res,
-//        //            // something is wrong with chat server
-//        //            _ => ctx.stop(),
-//        //        }
-//        //        fut::ready(())
-//        //    })
-//        //    .wait(ctx);
-//    }
-//
-//    fn stopping(&mut self, _: &mut Self::Context) -> Running {
-//        // notify chat server
-//        //self.addr.do_send(server::Disconnect { id: self.id });
-//        println!("ln");
-//        Running::Stop
-//    }
-//}
-//
-//
-//
 
 
+//       _              _   _             _     _                          
+//      | |__     ___  | | | |   ___     | |_  | |__     ___   _ __    ___ 
+//      | '_ \   / _ \ | | | |  / _ \    | __| | '_ \   / _ \ | '__|  / _ \
+//      | | | | |  __/ | | | | | (_) |   | |_  | | | | |  __/ | |    |  __/
+//      |_| |_|  \___| |_| |_|  \___/     \__| |_| |_|  \___| |_|     \___|
+//                                                                         
+async fn index(req: HttpRequest, stream: web::Payload) -> Result<HttpResponse, Error> {
+    let resp = ws::start(WsChatSession { id: 1, room: String::from("start room"), name: String::from("hello there statr room bame") }, &req, stream);
+    println!("{:?}", resp);
+    resp
+}
 
 
 
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
-        App::new()
-            .service(handlers::hello)
-            .service(handlers::echo)
-            .service(
-                // prefixes all resources and routes attached to it...
-                web::scope("/app")
-                    // ...so this handles requests for `GET /app/index.html`
-                    .route("/", web::get().to(chat_route)),
-            )
-//
-            .route("/hey", web::get().to(handlers::manual_hello))
-    })
-    .bind(("127.0.0.1", 5000))?
-    .run()
-    .await
-}
+    println!("{:?}", "hello there 1111111111111111111");
 
+    HttpServer::new(|| App::new().route("/", web::get().to(index)))
+        .bind(("127.0.0.1", 5000))?
+        .run()
+        .await
+}
 
 
 
