@@ -60,7 +60,7 @@
 		}, 1000);
 
         console.log('ggggggggggggggggggggggggggggggggggggggggggggggg')
-        socket = new WebSocket("ws://localhost:5000")
+        socket = new WebSocket("ws://localhost:5000/ws")
         socket.addEventListener("open", ()=> {
             console.log("Opened")
 	    });
@@ -93,6 +93,7 @@
 
     })
         const test = (e) => {
+            socket.send("i was clcicked")
             //console.log('hello')
             //console.log(center_box)
 //

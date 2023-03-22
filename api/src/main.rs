@@ -79,6 +79,20 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WsChatSession {
                 println!("{}", text);
                 //println!("{:?}", ctx);
                 ctx.text(text);
+                //println!("{:?}", ThreadRng);
+                println!("{:?}", rand::thread_rng());
+                //let m = text.trim();
+                //let msg = if let Some(ref name) = self.name {
+                //    format!("{name}: {m}")
+                //} else {
+                //    m.to_owned()
+                //};
+                //// send message to chat server
+                //self.addr.do_send(server::Message {
+                //    id: self.id,
+                //    msg,
+                //    room: self.room.clone(),
+                //})
             },
             Ok(ws::Message::Binary(bin)) => {
                 println!("hhelloooo3");
