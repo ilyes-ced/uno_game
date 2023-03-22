@@ -10,7 +10,7 @@ use log::{debug, error, log_enabled, info, Level};
 use actix::*;
 use actix_files::{Files, NamedFile};
 use actix_web::{
-    middleware::Logger, web, App, Error, HttpRequest, HttpResponse, HttpServer, Responder,
+    middleware::Logger, web, App, Error, HttpRequest, HttpResponse, HttpServer, Responder, web::Data
 };
 use actix_web_actors::ws;
 
@@ -25,7 +25,7 @@ async fn index() -> impl Responder {
 async fn chat_route(
     req: HttpRequest,
     stream: web::Payload,
-    srv: web::Data<Addr<server::ChatServer>>,
+    srv: Data<Addr<server::ChatServer>>,
 ) -> Result<HttpResponse, Error> {
     ws::start(
         session::WsChatSession {

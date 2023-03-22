@@ -1,5 +1,3 @@
-
-
 <script lang='ts'>
 
     import Number_card from './minimal/Number_card.svelte';
@@ -65,19 +63,15 @@
             console.log("Opened")
 	    });
 
-        const interval2 = setInterval(() => {
-            socket.send(time)
-		}, 1000);
+        //const interval2 = setInterval(() => {
+        //    socket.send(time)
+		//}, 1000);
         socket.onmessage = (ev) => {
           console.log('Received: ' + ev.data, 'message')
         }
 
         socket.onopen = () => {
           console.log('Connected')
-        }
-
-        socket.onmessage = (ev) => {
-          console.log('Received: ' + ev.data, 'message')
         }
 
         socket.onclose = () => {
