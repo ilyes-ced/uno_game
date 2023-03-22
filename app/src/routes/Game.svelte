@@ -37,9 +37,7 @@
         e.target.classList.remove('raised')
     }
 
-	import { onMount } from 'svelte';
 
-	let time = new Date();
 	let center_box 
     let center_box_cards = [
         {type: 'block', color: red_bg },
@@ -48,50 +46,10 @@
 
 	// these automatically update when `time`
 	// changes, because of the `$:` prefix
-	$: hours = time.getHours();
-	$: minutes = time.getMinutes();
-	$: seconds = time.getSeconds();
-
-    let socket
-
-	onMount(() => {
-		const interval = setInterval(() => {
-			time = new Date();
-		}, 1000);
-
-        console.log('ggggggggggggggggggggggggggggggggggggggggggggggg')
-        socket = new WebSocket("ws://localhost:5000")
-        socket.addEventListener("open", ()=> {
-            console.log("Opened")
-	    });
-
-        const interval2 = setInterval(() => {
-            socket.send(time)
-		}, 1000);
-        socket.onmessage = (ev) => {
-          console.log('Received: ' + ev.data, 'message')
-        }
-
-        socket.onopen = () => {
-          console.log('Connected')
-        }
-
-        socket.onmessage = (ev) => {
-          console.log('Received: ' + ev.data, 'message')
-        }
-
-        socket.onclose = () => {
-          console.log('Disconnected')
-        }
 
 
 
-		return () => {
-			clearInterval(interval);
-		};
 
-
-    })
         const test = (e) => {
             //console.log('hello')
             //console.log(center_box)
@@ -141,10 +99,7 @@
 
 
 <div class='  w-full flex items-center justify-between grow'>
-    <div class="absolute ">
-        {hours + ':'+minutes+':'+seconds}
-        
-    </div>
+
 
     <div id='game_board_back' class='absolute bottom-0 left-0  w-full h-full'></div>
     <div class="w-full h-full flex  " id='game_board'>  
