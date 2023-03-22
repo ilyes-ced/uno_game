@@ -77,6 +77,7 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WsChatSession {
             //                                                                                                                                 |___/        
             Ok(ws::Message::Text(text)) => {
                 println!("{}", text);
+                //println!("{:?}", ctx);
                 ctx.text(text);
             },
             Ok(ws::Message::Binary(bin)) => {
@@ -97,6 +98,8 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WsChatSession {
 //      |_| |_|  \___| |_| |_|  \___/     \__| |_| |_|  \___| |_|     \___|
 //                                                                         
 async fn index(req: HttpRequest, stream: web::Payload) -> Result<HttpResponse, Error> {
+    println!("{:?}", req.peer_addr());
+        
     let resp = ws::start(WsChatSession { id: 1, room: String::from("start room"), name: String::from("hello there statr room bame") }, &req, stream);
     println!("{:?}", resp);
     resp
