@@ -58,14 +58,15 @@
 		}, 1000);
 
         console.log('ggggggggggggggggggggggggggggggggggggggggggggggg')
-        socket = new WebSocket("ws://localhost:5000/ws")
+        socket = new WebSocket("ws://localhost:8080/ws/")
         socket.addEventListener("open", ()=> {
             console.log("Opened")
 	    });
 
-        //const interval2 = setInterval(() => {
-        //    socket.send(time)
-		//}, 1000);
+        const interval2 = setInterval(() => {
+            socket.send(time)
+		}, 1000);
+
         socket.onmessage = (ev) => {
           console.log('Received: ' + ev.data, 'message')
         }
@@ -141,7 +142,29 @@
         
     </div>
 
-    <div id='game_board_back' class='absolute bottom-0 left-0  w-full h-full'></div>
+
+
+
+
+
+    <!--  
+
+    //                                     888               888                                                                                         888                             888 888                  
+    //                                     888               888                                                                                         888                             888 888                  
+    //                                     888               888                                                                                         888                             888 888                  
+    //          .d8888b   .d88b.   .d8888b 888  888  .d88b.  888888     88888b.d88b.   .d88b.  .d8888b  .d8888b   8888b.   .d88b.   .d88b.  .d8888b      88888b.   8888b.  88888b.   .d88888 888  .d88b.  888d888 
+    //          88K      d88""88b d88P"    888 .88P d8P  Y8b 888        888 "888 "88b d8P  Y8b 88K      88K          "88b d88P"88b d8P  Y8b 88K          888 "88b     "88b 888 "88b d88" 888 888 d8P  Y8b 888P"   
+    //          "Y8888b. 888  888 888      888888K  88888888 888        888  888  888 88888888 "Y8888b. "Y8888b. .d888888 888  888 88888888 "Y8888b.     888  888 .d888888 888  888 888  888 888 88888888 888     
+    //               X88 Y88..88P Y88b.    888 "88b Y8b.     Y88b.      888  888  888 Y8b.          X88      X88 888  888 Y88b 888 Y8b.          X88     888  888 888  888 888  888 Y88b 888 888 Y8b.     888     
+    //           88888P'  "Y88P"   "Y8888P 888  888  "Y8888   "Y888     888  888  888  "Y8888   88888P'  88888P' "Y888888  "Y88888  "Y8888   88888P'     888  888 "Y888888 888  888  "Y88888 888  "Y8888  888     
+    //                                                                                                                         888                                                                                
+    //                                                                                                                    Y8b d88P                                                                                
+    //                                                                                                                     "Y88P"                                                                                 
+    //           
+        <div id='game_board_back' class='absolute bottom-0 left-0  w-full h-full'></div>
+    -->
+
+
     <div class="w-full h-full flex  " id='game_board'>  
         <!--  LEFT  -->
         <div class='w-1/4 h-full  flex items-center justify-center ' >

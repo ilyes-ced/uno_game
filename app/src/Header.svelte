@@ -20,14 +20,14 @@
 
 
     <div class='flex '>
-        <div class=' flex items-center px-4 py-1  bg-white border'>
-            <a class='w-full h-full bg-red-600' href="#/">1222</a>
+        <div class=' flex items-center px-4 py-1   '>
+            <a class='w-full h-full hover:underline hover:text-[#e33050] ' href="#/">home page</a>
         </div>
-        <div class=' flex items-center px-4 py-1  bg-white border'>
-            <a class='w-full h-full bg-red-600' href="#/game">1222</a>
+        <div class=' flex items-center px-4 py-1   '>
+            <a class='w-full h-full hover:underline hover:text-[#e33050] ' href="#/game">game</a>
         </div>
-        <div class=' flex items-center px-4 py-1  bg-white border'>
-            <a class='w-full h-full bg-red-600' href="#/ff">1222</a>
+        <div class=' flex items-center px-4 py-1   '>
+            <a class='w-full h-full hover:underline hover:text-[#e33050] ' href="#/ff">settings</a>
         </div>
     </div>
 

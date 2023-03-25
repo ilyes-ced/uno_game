@@ -48,39 +48,35 @@
 
 </script>
 
-<div class="h-full w-fit bg-[#100a29] mx-auto max-w-[1200px]">
+<div class="h-full w-fit bg-[#100a29] mx-auto max-w-[1200px] flex flex-col">
     <div>
         <img src="../images/purple_uno_img.jpg" alt="dd">
     </div>
 
-    <div class='w-full  flex space-x-24 px-24'>
-        <div class='rotate-[10deg] -skew-y-[10deg] w-1/3 p-8 bg-[#28233f] flex items-center justify-center flex-col '>
+    <div class='w-full  flex space-x-24 px-24 grow items-center justify-center'>
+        <div class='rotate-[10deg] -skew-y-[10deg] w-1/3 p-8 bg-[#28233f] flex items-center justify-center flex-col space-y-4  '>
             <p>
                 join pblic game
             </p>
-            <button on:click={join_public} class='border-2 py-2 px-4 hover:bg-gray-600'>
+            <button on:click={join_public} class='text-white py-2 px-4 bg-[#e33050] hover:bg-[#100a29]'>
                 do
             </button>
         </div>
-        <div class='rotate-[10deg] -skew-y-[10deg] w-1/3 p-8 bg-[#28233f] flex items-center justify-center flex-col '>
+        <div class='rotate-[10deg] -skew-y-[10deg] w-1/3 p-8 bg-[#28233f] flex items-center justify-center flex-col space-y-4  '>
             <p>
                 join private game
             </p>
-            <button on:click={join_private} class='border-2 py-2 px-4 hover:bg-gray-600'>
+            <button on:click={join_private} class='text-white py-2 px-4 bg-[#e33050] hover:bg-[#100a29]'>
                 do
             </button>
         </div>
-        <div class='rotate-[10deg] -skew-y-[10deg] w-1/3 p-8 bg-[#28233f] flex items-center justify-center flex-col '>
+        <div class='rotate-[10deg] -skew-y-[10deg] w-1/3 p-8 bg-[#28233f] flex items-center justify-center flex-col  space-y-4 '>
             <p>
                 create a game
             </p>
-            <button on:click={create} class='border-2 py-2 px-4 hover:bg-gray-600'>
+            <button on:click={create} class='text-white py-2 px-4 bg-[#e33050] hover:bg-[#100a29]'>
                 do
             </button>
-            <div class="flex items-center justify-center">
-                <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]">
-                </div>
-            </div>
         </div>
 
 
@@ -143,6 +139,10 @@
                         <input class='bg-[#100a29] border-2 px-4 py-2 rounded-lg ' type="text" name='password' placeholder='game password'>
                         <div class='w-full flex '>
                             <button class='bg-red-600 border-2 px-4 py-2 rounded-lg'>join</button>
+                            <div class="flex items-center justify-center">
+                                <div class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
