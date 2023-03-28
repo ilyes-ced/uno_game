@@ -26,7 +26,6 @@ async fn chat_route(
     stream: web::Payload,
     srv: web::Data<Addr<server::ChatServer>>,
 ) -> Result<HttpResponse, Error> {
-    println!("{:?}", srv);
     ws::start(
         session::WsChatSession {
             id: 0,

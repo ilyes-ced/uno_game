@@ -9,7 +9,7 @@ use std::{
         Arc,
     },
 };
-
+use serde::{Serialize, Deserialize};
 use actix::prelude::*;
 use rand::{self, rngs::ThreadRng, Rng};
 
@@ -27,6 +27,14 @@ pub struct Connect {
     pub addr: Recipient<Message>,
 }
 
+#[derive(Deserialize, Debug)]
+pub struct Card {
+    r#type: String,
+    color: String,
+    value: i8,
+}
+
+
 /// Session is disconnected
 #[derive(Message)]
 #[rtype(result = "()")]
@@ -35,7 +43,7 @@ pub struct Disconnect {
 }
 
 /// Send message to specific room
-#[derive(Message)]
+#[derive(Message, Debug)]
 #[rtype(result = "()")]
 pub struct ClientMessage {
     /// Id of the client session
@@ -172,6 +180,9 @@ impl Handler<ClientMessage> for ChatServer {
     type Result = ();
 
     fn handle(&mut self, msg: ClientMessage, _: &mut Context<Self>) {
+        //let obj: Card = serde_json::from_str(&msg.msg).unwrap();
+        //println!("{:?}", obj);
+        
         self.send_message(&msg.room, msg.msg.as_str(), msg.id);
     }
 }

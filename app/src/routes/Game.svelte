@@ -18,10 +18,10 @@
         {type: 'number', value:1, color: red_bg },
         {type: 'number', value:6, color: green_bg },
         {type: 'number', value:7, color: yellow_bg },
-        {type: 'block', color: red_bg },
-        {type: 'change_direction', color: yellow_bg },
-        {type: 'pick_four', color: 'black' },
-        {type: 'change_color', color: 'black', is_blank:true },
+        {type: 'block', color: red_bg, value:100 },
+        {type: 'change_direction', color: yellow_bg, value:100 },
+        {type: 'pick_four', color: 'black', value:100 },
+        {type: 'change_color', color: 'black', is_blank:true, value:100 },
     ]
 
     let user1_cards = 10
@@ -92,7 +92,6 @@
 
     })
         const test = (e) => {
-            socket.send("i was clcicked")
             //console.log('hello')
             //console.log(center_box)
             //var rect = center_box.getBoundingClientRect();
@@ -123,12 +122,22 @@
 //
 //
 //
+
+
+            console.log('/////////////////////////////////////////////////////////////////')
+            console.log('/////////////////////////////////////////////////////////////////')
+            console.log(cards_tempo[e.target.id])
+            console.log(e.target)
+            console.log('/////////////////////////////////////////////////////////////////')
+            console.log('/////////////////////////////////////////////////////////////////')
+            socket.send(JSON.stringify((cards_tempo[e.target.id])))
+
             center_box_cards = [...center_box_cards, cards_tempo[e.target.id]]
             cards_tempo.splice(e.target.id, 1)
             cards_tempo = [...cards_tempo]
             console.log(center_box_cards)
-            console.log(cards_tempo[e.target.id] )
-            socket.send(cards_tempo[e.target.id] )
+
+ 
 
 
 
@@ -149,7 +158,6 @@
 <div class='  w-full flex items-center justify-between grow'>
     <div class="absolute ">
         {hours + ':'+minutes+':'+seconds}
-        
     </div>
 
 
@@ -178,11 +186,11 @@
     <div class="w-full h-full flex  " id='game_board'>  
         <!--  LEFT  -->
         <div class='w-1/4 h-full  flex items-center justify-center ' >
-            <div class='w-2/3 h-2/3  flex items-center justify-center'>
-                <div class='w-2/3 h-full  flex items-center justify-center '>
-                    <div id='' class='flex relative bg-green-600 w-full'  style={ 'height: '+(cards_tempo.length*40)+'px	' } >
+            <div class=' w-48  h-2/3  flex items-center justify-center'>
+                <div class=' w-48  h-full  flex items-center justify-center '>
+                    <div id='' class='flex relative bg-green-600  h-full w-48 rounded-md outline'   >
                         {#each Array(user1_cards) as _, i}
-                            <div class='absolute transition-all ease-in-out duration-300 -rotate-90  left-1/2 -translate-x-1/2 '   style={"top: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
+                            <div class='absolute transition-all ease-in-out duration-300 -rotate-90  left-1/2 -translate-x-1/2   top-1/2 translate-y-1/2 '   style={"top: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
                                 <Back />
                             </div>	
                         {/each}
@@ -194,7 +202,7 @@
             <!--  TOP  -->
             <div class='w-full h-2/3  flex items-center justify-center     ' >
                 <div class='w-full h-full   flex items-start justify-center'>
-                    <div id='' class='flex relative h-full   ' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
+                    <div id='' class='flex relative  h-48 rounded-md outline   w-full  '  >
                         {#each Array(user2_cards) as _, i}
                             <div class='absolute transition-all ease-in-out duration-300 top-1/2 -translate-y-1/2  '   style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
                                 <Back />
@@ -204,8 +212,8 @@
                 </div>
             </div>
             <!--  CENTER  -->
-            <div class='w-full h-full  flex items-center justify-center' >
-                <div class='w-64 h-48 bg-green-500   rounded-lg flex ' bind:this={center_box}>
+            <div class='w-full h-full  flex items-center justify-center ' >
+                <div class='w-64 h-48 bg-green-500   rounded-lg flex  ' bind:this={center_box}>
                     <Back />
                     {#if last_card.type === 'number'}
                         <Number_card   number={last_card.value} bg={last_card.color}   />
@@ -221,10 +229,10 @@
             </div>
             <!--  BOTTOM  -->
             <div class='w-full h-2/3  flex items-center justify-center     ' >
-                <div class='w-full h-full   flex items-start justify-center'>
-                    <div id='' class='flex relative h-full bg-green-600  ' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
+                <div class='w-full h-full   flex items-start justify-center '>
+                    <div id='' class='flex relative   h-48 rounded-md outline   w-full '  >
                         {#each cards_tempo as card, i}
-                            <div  id={i+''} class='absolute transition-all ease-in-out duration-300  top-1/2 -translate-y-1/2 cursor-pointer' style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} on:click={test} on:keydown={()=>{console.log('idk why')}} >
+                            <div  id={i+''} class='absolute transition-all ease-in-out duration-300  top-1/2 -translate-y-1/2 cursor-pointer' style={"left: "+(i*cards_tempo.length)+"%;"} on:click={test} on:keydown={()=>{console.log('idk why')}} >
                                 {#if card.type === 'number'}
                                     <Number_card number={card.value} bg={card.color}   />
                                 {:else if card.type === 'change_direction' || card.type === 'block' || card.type === 'pick_two'}
@@ -242,11 +250,11 @@
         </div>
         <!--  RIGHT  -->
         <div class='w-1/4 h-full  flex items-center justify-center ' >
-            <div class='w-2/3 h-2/3  flex items-center justify-center'>
-                <div class='w-2/3 h-full  flex items-center justify-center '>
-                    <div id='' class='flex relative bg-green-600 w-full '  style={ 'height: '+(cards_tempo.length*40)+'px	' } >
+            <div class='w-48 h-2/3  flex items-center justify-center'>
+                <div class='w-48 h-full  flex items-center justify-center '>
+                    <div id='' class='flex relative bg-green-600 w-48 h-full outline ' >
                         {#each Array(user3_cards) as _, i}
-                            <div class='absolute transition-all ease-in-out duration-300 rotate-90  left-1/2 -translate-x-1/2 '   style={"top: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
+                            <div class='absolute transition-all ease-in-out duration-300 rotate-90  left-1/2 -translate-x-1/2    top-1/2 translate-y-1/2  '   style={"top: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
                                 <Back />
                             </div>	
                         {/each}
