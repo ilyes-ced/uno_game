@@ -24,6 +24,10 @@
         {type: 'change_color', color: 'black', is_blank:true },
     ]
 
+    let user1_cards = 10
+    let user2_cards = 4
+    let user3_cards = 3
+
     let offset = 0
 
 
@@ -63,9 +67,9 @@
             console.log("Opened")
 	    });
 
-        const interval2 = setInterval(() => {
-            socket.send(time)
-		}, 1000);
+        //const interval2 = setInterval(() => {
+        //    socket.send(time)
+		//}, 1000);
 
         socket.onmessage = (ev) => {
           console.log('Received: ' + ev.data, 'message')
@@ -91,16 +95,15 @@
             socket.send("i was clcicked")
             //console.log('hello')
             //console.log(center_box)
-//
             //var rect = center_box.getBoundingClientRect();
             //console.log(rect.top, rect.right, rect.bottom, rect.left);
-//
-//console.log(e.target.style.translate)
-//e.target.style.top = 0
-//e.target.style.left = 0
-//e.target.style.top = rect.top
-//e.target.style.left = rect.left
-//console.log(e.target.getBoundingClientRect())
+            //
+            //console.log(e.target.style.translate)
+            //e.target.style.top = 0
+            //e.target.style.left = 0
+            //e.target.style.top = rect.top
+            //e.target.style.left = rect.left
+            //console.log(e.target.getBoundingClientRect())
 
             let new_element = e.target.cloneNode(true);
             console.log(new_element)
@@ -109,21 +112,28 @@
             var rect = e.target.getBoundingClientRect();
             console.log(rect.top, rect.right, rect.bottom, rect.left);
             
-            center_box.firstChild.nextSibling.remove()
-            new_element.style.backgroundColor = 'red'
-            console.log('++++++++++++++++++++++++', rect.top, rect.left)
-            new_element.style.position = 'absolute'
-            new_element.style.top = rect.top
-            new_element.style.left = rect.left
-            console.log( new_element.getBoundingClientRect())
-            center_box.firstChild.appendChild(new_element)
-
-
-
+            //center_box.firstChild.nextSibling.remove()
+            //new_element.style.backgroundColor = 'red'
+            //console.log('++++++++++++++++++++++++', rect.top, rect.left)
+            //new_element.style.position = 'absolute'
+            //new_element.style.top = rect.top
+            //new_element.style.left = rect.left
+            //console.log( new_element.getBoundingClientRect())
+            //center_box.firstChild.appendChild(new_element)
+//
+//
+//
             center_box_cards = [...center_box_cards, cards_tempo[e.target.id]]
             cards_tempo.splice(e.target.id, 1)
             cards_tempo = [...cards_tempo]
             console.log(center_box_cards)
+            console.log(cards_tempo[e.target.id] )
+            socket.send(cards_tempo[e.target.id] )
+
+
+
+
+
         }
 
         let last_card
@@ -171,7 +181,7 @@
             <div class='w-2/3 h-2/3  flex items-center justify-center'>
                 <div class='w-2/3 h-full  flex items-center justify-center '>
                     <div id='' class='flex relative bg-green-600 w-full'  style={ 'height: '+(cards_tempo.length*40)+'px	' } >
-                        {#each cards_tempo as card, i}
+                        {#each Array(user1_cards) as _, i}
                             <div class='absolute transition-all ease-in-out duration-300 -rotate-90  left-1/2 -translate-x-1/2 '   style={"top: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
                                 <Back />
                             </div>	
@@ -185,7 +195,7 @@
             <div class='w-full h-2/3  flex items-center justify-center     ' >
                 <div class='w-full h-full   flex items-start justify-center'>
                     <div id='' class='flex relative h-full   ' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
-                        {#each cards_tempo as card, i}
+                        {#each Array(user2_cards) as _, i}
                             <div class='absolute transition-all ease-in-out duration-300 top-1/2 -translate-y-1/2  '   style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
                                 <Back />
                             </div>	
@@ -198,13 +208,13 @@
                 <div class='w-64 h-48 bg-green-500   rounded-lg flex ' bind:this={center_box}>
                     <Back />
                     {#if last_card.type === 'number'}
-                        <Number_card number={last_card.value} bg={last_card.color}   />
+                        <Number_card   number={last_card.value} bg={last_card.color}   />
                     {:else if last_card.type === 'change_direction' || last_card.type === 'block' || last_card.type === 'pick_two'}
-                        <Arrow_block type={last_card.type} bg={last_card.color}   />
+                        <Arrow_block   type={last_card.type} bg={last_card.color}   />
                     {:else if last_card.type === 'pick_four'}
-                        <Fours type={last_card.type} bg={last_card.color}   />
+                        <Fours   type={last_card.type} bg={last_card.color}   />
                     {:else if last_card.type === 'change_color'}
-                        <Colored_card type={last_card.type} bg={last_card.color} is_blank={last_card.is_blank}  />
+                        <Colored_card   type={last_card.type} bg={last_card.color} is_blank={last_card.is_blank}  />
                     {/if}
                     
                 </div>
@@ -214,7 +224,7 @@
                 <div class='w-full h-full   flex items-start justify-center'>
                     <div id='' class='flex relative h-full bg-green-600  ' style={ 'width: '+(cards_tempo.length*40)+'px	' } >
                         {#each cards_tempo as card, i}
-                            <div id={i+''} class='absolute transition-all ease-in-out duration-300  top-1/2 -translate-y-1/2 cursor-pointer' style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} on:click={test} on:keydown={()=>{console.log('idk why')}} >
+                            <div  id={i+''} class='absolute transition-all ease-in-out duration-300  top-1/2 -translate-y-1/2 cursor-pointer' style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} on:click={test} on:keydown={()=>{console.log('idk why')}} >
                                 {#if card.type === 'number'}
                                     <Number_card number={card.value} bg={card.color}   />
                                 {:else if card.type === 'change_direction' || card.type === 'block' || card.type === 'pick_two'}
@@ -235,7 +245,7 @@
             <div class='w-2/3 h-2/3  flex items-center justify-center'>
                 <div class='w-2/3 h-full  flex items-center justify-center '>
                     <div id='' class='flex relative bg-green-600 w-full '  style={ 'height: '+(cards_tempo.length*40)+'px	' } >
-                        {#each cards_tempo as card, i}
+                        {#each Array(user3_cards) as _, i}
                             <div class='absolute transition-all ease-in-out duration-300 rotate-90  left-1/2 -translate-x-1/2 '   style={"top: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
                                 <Back />
                             </div>	
