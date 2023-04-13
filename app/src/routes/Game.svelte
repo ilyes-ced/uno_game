@@ -190,7 +190,7 @@
                 <div class=' w-48  h-full  flex items-center justify-center '>
                     <div id='' class='flex relative bg-green-600  h-full w-48 rounded-md outline'   >
                         {#each Array(user1_cards) as _, i}
-                            <div class='absolute transition-all ease-in-out duration-300 -rotate-90  left-1/2 -translate-x-1/2   top-1/2 translate-y-1/2 '   style={"top: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
+                            <div class='absolute transition-all ease-in-out duration-300 -rotate-90  left-1/2 -translate-x-1/2   top-1/2 translate-y-1/2 '   style={"top: calc( "+i+"*( 100% / "+user1_cards+" ) )"} >
                                 <Back />
                             </div>	
                         {/each}
@@ -200,11 +200,11 @@
         </div>
         <div class='w-1/2 h-full  flex flex-col' >
             <!--  TOP  -->
-            <div class='w-full h-2/3  flex items-center justify-center     ' >
-                <div class='w-full h-full   flex items-start justify-center'>
+            <div class='w-full h-2/3  flex items-center justify-center    ' >
+                <div class='w-full h-full   flex items-end justify-center'>
                     <div id='' class='flex relative  h-48 rounded-md outline   w-full  '  >
                         {#each Array(user2_cards) as _, i}
-                            <div class='absolute transition-all ease-in-out duration-300 top-1/2 -translate-y-1/2  '   style={"left: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
+                            <div class='absolute transition-all ease-in-out duration-300 top-1/2 -translate-y-1/2  '  style={"left: calc( "+i+"*( 100% / "+user2_cards+" ) )"} >
                                 <Back />
                             </div>	
                         {/each}
@@ -213,26 +213,27 @@
             </div>
             <!--  CENTER  -->
             <div class='w-full h-full  flex items-center justify-center ' >
-                <div class='w-64 h-48 bg-green-500   rounded-lg flex  ' bind:this={center_box}>
+                <div class='w-64 h-48 bg-green-500   rounded-lg flex  outline ' bind:this={center_box}>
                     <Back />
                     {#if last_card.type === 'number'}
-                        <Number_card   number={last_card.value} bg={last_card.color}   />
+                        <Number_card number={last_card.value} bg={last_card.color}   />
                     {:else if last_card.type === 'change_direction' || last_card.type === 'block' || last_card.type === 'pick_two'}
-                        <Arrow_block   type={last_card.type} bg={last_card.color}   />
+                        <Arrow_block type={last_card.type} bg={last_card.color}   />
                     {:else if last_card.type === 'pick_four'}
-                        <Fours   type={last_card.type} bg={last_card.color}   />
+                        <Fours type={last_card.type} bg={last_card.color}   />
                     {:else if last_card.type === 'change_color'}
-                        <Colored_card   type={last_card.type} bg={last_card.color} is_blank={last_card.is_blank}  />
+                        <Colored_card type={last_card.type} bg={last_card.color} is_blank={last_card.is_blank}  />
                     {/if}
                     
                 </div>
             </div>
             <!--  BOTTOM  -->
-            <div class='w-full h-2/3  flex items-center justify-center     ' >
+            <div class='w-full h-2/3  flex items-center justify-center    ' >
                 <div class='w-full h-full   flex items-start justify-center '>
                     <div id='' class='flex relative   h-48 rounded-md outline   w-full '  >
                         {#each cards_tempo as card, i}
-                            <div  id={i+''} class='absolute transition-all ease-in-out duration-300  top-1/2 -translate-y-1/2 cursor-pointer' style={"left: "+(i*cards_tempo.length)+"%;"} on:click={test} on:keydown={()=>{console.log('idk why')}} >
+							<!-- "+(i*cards_tempo.length)+"%; -->
+                            <div  id={i+''} class='absolute transition-all ease-in-out duration-300  top-1/2 -translate-y-1/2 cursor-pointer' style={"left: calc( "+i+"*( 100% / "+cards_tempo.length+" ) ) "} on:click={test} on:keydown={()=>{console.log('idk why')}} >
                                 {#if card.type === 'number'}
                                     <Number_card number={card.value} bg={card.color}   />
                                 {:else if card.type === 'change_direction' || card.type === 'block' || card.type === 'pick_two'}
@@ -252,9 +253,9 @@
         <div class='w-1/4 h-full  flex items-center justify-center ' >
             <div class='w-48 h-2/3  flex items-center justify-center'>
                 <div class='w-48 h-full  flex items-center justify-center '>
-                    <div id='' class='flex relative bg-green-600 w-48 h-full outline ' >
+                    <div id='' class='flex relative bg-green-600 w-48 h-full outline rounded-md ' >
                         {#each Array(user3_cards) as _, i}
-                            <div class='absolute transition-all ease-in-out duration-300 rotate-90  left-1/2 -translate-x-1/2    top-1/2 translate-y-1/2  '   style={"top: "+(i*cards_tempo.length*40/(cards_tempo.length+3))+"px;"} >
+                            <div class='absolute transition-all ease-in-out duration-300 rotate-90  left-1/2 -translate-x-1/2    top-1/2 translate-y-1/2  '   style={"top: calc( "+i+"*( 100% / "+user3_cards+" ) )"} >
                                 <Back />
                             </div>	
                         {/each}

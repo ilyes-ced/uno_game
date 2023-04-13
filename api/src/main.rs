@@ -20,7 +20,6 @@ async fn index() -> impl Responder {
     NamedFile::open_async("./static/index.html").await.unwrap()
 }
 
-/// Entry point for our websocket route
 async fn chat_route(
     req: HttpRequest,
     stream: web::Payload,
@@ -47,13 +46,8 @@ async fn get_count(count: web::Data<AtomicUsize>) -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    //env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
-
-    // set up applications state
-    // keep a count of the number of visitors
     let app_state = Arc::new(AtomicUsize::new(0));
 
-    // start chat server actor
     let server = server::ChatServer::new(app_state.clone()).start();
 
     log::info!("starting HTTP server at http://localhost:8080");
