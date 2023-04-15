@@ -4,6 +4,7 @@ use std::{
         Arc,
     },
     time::Instant,
+    collections::HashMap,
 };
 
 use actix::*;
@@ -48,7 +49,9 @@ async fn get_count(count: web::Data<AtomicUsize>) -> impl Responder {
 async fn main() -> std::io::Result<()> {
     let app_state = Arc::new(AtomicUsize::new(0));
 
-    let server = server::ChatServer::new(app_state.clone()).start();
+    //let mut rooms = HashMap::new();
+    
+    let server = server::ChatServer::new("main_server".to_owned()).start();
 
     log::info!("starting HTTP server at http://localhost:8080");
 
