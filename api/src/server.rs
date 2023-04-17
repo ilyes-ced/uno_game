@@ -65,8 +65,8 @@ pub struct ClientMessage {
 impl ChatServer {
     pub fn new(room_id: usize) -> ChatServer {
         // default room
-        let mut rooms = HashMap::new();
         let pp: HashSet<usize> = HashSet::from([1]);
+        let mut rooms = HashMap::new();
         rooms.insert(room_id, pp);
 
 
@@ -77,9 +77,9 @@ impl ChatServer {
         }
     }
 
-    pub fn add_room(mut rooms: HashMap<String, HashSet<usize>>,room_name: String) {}
+    pub fn add_room(mut rooms: HashMap<usize, HashSet<usize>>,room_name: String) {}
 
-    fn send_message(&self, room: &str, message: &str, skip_id: usize) {}
+    fn send_message(&self, room: usize, message: &str, skip_id: usize) {}
 }
 
 
@@ -95,10 +95,38 @@ impl Actor for ChatServer {
 impl Handler<Connect> for ChatServer {
     type Result = usize;
 
-    fn handle(&mut self, msg: Connect, ctx: &mut Self::Context) -> Self::Result {
-        todo!()
+    fn handle(&mut self, msg: Connect, _: &mut Context<Self>) -> Self::Result {
+        println!(" {} has joined {} ", msg.id, msg.room_id );
+
+        // notify all users in same room
+        self.send_message(msg.room_id, "Someone joined", 0);
+
+        // register session with random id
+        let id = self.rng.gen::<usize>();
+        self.sessions.insert(id, msg.addr);
+
+        // auto join session to main room
+        self.rooms
+            .entry(msg.room_id)
+            .or_insert_with(HashSet::new)
+            .insert(id);
+
+
+        println!(" {:?} ", self.rooms);
+        println!(" {:?} ", self.sessions);
+
+        id
     }
 }
+
+
+
+
+
+
+
+
+
 
 
 impl Handler<Disconnect> for ChatServer {
@@ -108,41 +136,6 @@ impl Handler<Disconnect> for ChatServer {
         todo!()
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -62,7 +62,7 @@
 		}, 1000);
 
         console.log('ggggggggggggggggggggggggggggggggggggggggggggggg')
-        socket = new WebSocket("ws://localhost:8080/ws")
+        socket = new WebSocket("ws://localhost:8080/ws/0")
         socket.addEventListener("open", ()=> {
             console.log("Opened")
 	    });
