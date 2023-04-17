@@ -1,6 +1,6 @@
 use std::time::{Duration, Instant};
 use rand::{self, rngs::ThreadRng, Rng};
-
+use serde::{Deserialize, Serialize};
 use actix::prelude::*;
 use actix_web_actors::ws;
 
@@ -8,6 +8,18 @@ use crate::server;
 
 const HEARTBEAT_INTERVAL: Duration = Duration::from_secs(5);
 const CLIENT_TIMEOUT: Duration = Duration::from_secs(10);
+
+
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
+pub struct MessageType {
+    pub msg_type: String,
+    pub content: String
+}
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
+pub struct CreateRoom {
+    pub room_name: String,
+    pub content: String
+}
 
 
 #[derive(Debug)]
@@ -29,7 +41,7 @@ impl WsChatSession {
                 // heartbeat timed out
                 println!("Websocket Client heartbeat failed, disconnecting!");
 
-                act.addr.do_send(server::Disconnect { id: act.id, room_id: todo!() });
+                act.addr.do_send(server::Disconnect { user_id: act.id, room_id: todo!() });
 
                 ctx.stop();
 
@@ -61,28 +73,14 @@ impl Actor for WsChatSession {
         self.id = self.rng.gen::<usize>();
         self.hb(ctx);
         
-        println!(" {:?} ", &self.id);
-        let addr = ctx.address();
+        println!("this users_idd is  {:?} ", &self.id);
 
 
 
 
 
 
-        self.addr
-            .send(server::GetRooms {
-                addr: addr.recipient(),
-            })
-            .into_actor(self)
-            .then(|res, act, ctx| {
-                match res {
-                    Ok(res) => act.id = res,
-                    // something is wrong with chat server
-                    _ => ctx.stop(),
-                }
-                fut::ready(())
-            })
-            .wait(ctx);
+
 
 
 
@@ -136,13 +134,12 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WsChatSession {
                 self.hb = Instant::now();
             }
             ws::Message::Text(text) => {
-        println!("!!! message is sent");
+                println!("recieved this////////////////////////////{:?}//////////////// from {:?} ", text, self.id);
+                let new_msg: MessageType = serde_json::from_str(&text).unwrap();
+                println!("recieved this////////////////////////////{:?}//////////////// from {:?} ", new_msg, self.id);
 
-                ctx.text("!!! room name is required");
-                ctx.text("!!! room name is required");
-                ctx.text("!!! room name is required");
-                ctx.text("!!! room name is required");
-                ctx.text(format!("!!! unknown command: {:?} ", text));
+
+
             }
             ws::Message::Binary(_) => println!("Unexpected binary"),
             ws::Message::Close(reason) => {
@@ -159,5 +156,40 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WsChatSession {
 
 
 
+/*
+
+self.addr
+.send(server::Create {
+    user_id: self.id,
+    name: "first created room".to_owned(),
+    addr: ctx.address().recipient(),
+}).into_actor(self)
+.then(|res, act, ctx| {
+    match res {
+        Ok(res) => act.id = res,
+        // something is wrong with chat server
+        _ => ctx.stop(),
+    }
+    fut::ready(())
+})
+.wait(ctx);
 
 
+self.addr
+.send(server::GetRooms {
+    addr: ctx.address().recipient(),
+})
+.into_actor(self)
+.then(|res, act, ctx| {
+    //match res {
+    //    Ok(res) => act.id = res,
+    //    // something is wrong with chat server
+    //    _ => ctx.stop(),
+    //}
+    fut::ready(())
+})
+.wait(ctx);
+
+
+
+*/

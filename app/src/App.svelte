@@ -13,8 +13,25 @@
         '*': Not_found,
     }
     
-    
-    
+    import socket from './socket'
+    $: if (socket != null) {
+        socket.addEventListener("open", (data) => {
+            console.log(data);
+        
+            try {
+              socket.send(
+                JSON.stringify({
+                        msg_type: 'initial_connect',
+                        content: "hello"
+                    })
+              )
+            } catch (error) {
+              console.log(error)
+            }
+        
+        
+        });
+    }
 
 </script>
 

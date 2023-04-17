@@ -1,5 +1,5 @@
 <script lang='ts'>
-
+    import socket from '../socket'
     import Number_card from './minimal/Number_card.svelte';
     import Arrow_block from './minimal/Arrow_block.svelte';
     import Fours from './minimal/Fours.svelte';
@@ -32,8 +32,7 @@
 
 
     const raise = (e) => {
-        //e.target.classList.add('raised')
-        //console.log(e.target.parentElement)
+
     }
     const reset = (e) => {
         e.target.classList.remove('raised')
@@ -48,102 +47,117 @@
         {type: 'change_direction', color: yellow_bg },
     ]
 
-	// these automatically update when `time`
-	// changes, because of the `$:` prefix
 	$: hours = time.getHours();
 	$: minutes = time.getMinutes();
 	$: seconds = time.getSeconds();
 
-    let socket
 
-	onMount(() => {
-		const interval = setInterval(() => {
-			time = new Date();
-		}, 1000);
 
-        console.log('ggggggggggggggggggggggggggggggggggggggggggggggg')
-        socket = new WebSocket("ws://localhost:8080/ws/get_games")
-        socket.addEventListener("open", ()=> {
-            console.log("Opened")
-	    });
 
-        const interval2 = setInterval(() => {
-            socket.send(time)
-		}, 1000);
 
-        interval2
-        interval
+    onMount(() => {
+        $: if (socket != null) {
+            socket.addEventListener("open", (data) => {
+                console.log(data);
 
-        socket.onmessage = (ev) => {
-          console.log('Received: ' + ev.data, 'message')
+                try {
+                  socket.send(
+                    JSON.stringify({
+                        msg_type: 'create_room',
+                        content: "hello"
+                    })
+                  )
+                } catch (error) {
+                  console.log(error)
+                }
+
+
+            });
         }
-
-        socket.onopen = () => {
-          console.log('Connected')
-        }
-
-        socket.onclose = () => {
-          console.log('Disconnected')
-        }
-
-
-
-		return () => {
-			clearInterval(interval);
-		};
-
-
     })
+
+
+    //let socket
+//
+	//onMount(() => {
+	//	const interval = setInterval(() => {
+	//		time = new Date();
+	//	}, 1000);
+//
+    //    console.log('ggggggggggggggggggggggggggggggggggggggggggggggg')
+    //    socket = new WebSocket("ws://localhost:8080/ws/get_games")
+    //    socket.addEventListener("open", ()=> {
+    //        console.log("Opened")
+	//    });
+//
+    //    const interval2 = setTimeout(() => {
+    //        socket.send("/get some then see create room")
+	//	}, 1000);
+//
+    //    interval2
+    //    interval
+//
+    //    socket.onmessage = (ev) => {
+    //      console.log('Received: ' + ev.data, 'message')
+    //    }
+//
+    //    socket.onopen = () => {
+    //      console.log('Connected')
+    //    }
+//
+    //    socket.onclose = () => {
+    //      console.log('Disconnected')
+    //    }
+//
+//
+//
+	//	return () => {
+	//		clearInterval(interval);
+	//	};
+//
+//
+    //})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         const test = (e) => {
-            //console.log('hello')
-            //console.log(center_box)
-            //var rect = center_box.getBoundingClientRect();
-            //console.log(rect.top, rect.right, rect.bottom, rect.left);
-            //
-            //console.log(e.target.style.translate)
-            //e.target.style.top = 0
-            //e.target.style.left = 0
-            //e.target.style.top = rect.top
-            //e.target.style.left = rect.left
-            //console.log(e.target.getBoundingClientRect())
+            
+            try {
+                  socket.send(
+                    JSON.stringify({
+                        msg_type: 'card_play',
+                        content: "hello"
+                    })
+                  )
+                } catch (error) {
+                  console.log(error)
+                }
+
+
 
             let new_element = e.target.cloneNode(true);
-            console.log(new_element)
 
 
             var rect = e.target.getBoundingClientRect();
-            console.log(rect.top, rect.right, rect.bottom, rect.left);
-            
-            //center_box.firstChild.nextSibling.remove()
-            //new_element.style.backgroundColor = 'red'
-            //console.log('++++++++++++++++++++++++', rect.top, rect.left)
-            //new_element.style.position = 'absolute'
-            //new_element.style.top = rect.top
-            //new_element.style.left = rect.left
-            //console.log( new_element.getBoundingClientRect())
-            //center_box.firstChild.appendChild(new_element)
-//
-//
-//
-
-
-            console.log('/////////////////////////////////////////////////////////////////')
-            console.log('/////////////////////////////////////////////////////////////////')
-            console.log(cards_tempo[e.target.id])
-            console.log(e.target)
-            console.log('/////////////////////////////////////////////////////////////////')
-            console.log('/////////////////////////////////////////////////////////////////')
-            socket.send(JSON.stringify((cards_tempo[e.target.id])))
+  
+            //socket.send(JSON.stringify((cards_tempo[e.target.id])))
 
             center_box_cards = [...center_box_cards, cards_tempo[e.target.id]]
             cards_tempo.splice(e.target.id, 1)
             cards_tempo = [...cards_tempo]
-            console.log(center_box_cards)
-
- 
-
-
-
 
 
         }

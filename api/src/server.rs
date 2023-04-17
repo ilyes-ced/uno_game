@@ -26,7 +26,7 @@ pub struct ChatServer {
 }
 
 #[derive(Message)]
-#[rtype(usize)]
+#[rtype(String)]
 pub struct GetRooms {
     pub addr: Recipient<Message>,
 }
@@ -34,29 +34,30 @@ pub struct GetRooms {
 #[derive(Message)]
 #[rtype(usize)]
 pub struct Connect {
-    pub id: usize,
-    pub room_id: usize,
     pub addr: Recipient<Message>,
+    pub user_id: usize,
+    pub room_id: usize,
 }
 
 #[derive(Message)]
 #[rtype(result = "()")]
 pub struct Disconnect {
-    pub id: usize,
+    pub user_id: usize,
     pub room_id: usize,
 }
 
 #[derive(Message)]
 #[rtype(result = "()")]
 pub struct Join {
-    pub id: usize,
+    pub user_id: usize,
     pub room_id: usize,
 }
 
 #[derive(Message)]
-#[rtype(result = "()")]
+#[rtype(usize)]
 pub struct Create {
-    pub id: usize,
+    pub addr: Recipient<Message>,
+    pub user_id: usize,
     pub name: String,
 }
 
@@ -64,7 +65,7 @@ pub struct Create {
 #[derive(Message)]
 #[rtype(result = "()")]
 pub struct ClientMessage {
-    pub id: usize,
+    pub user_id: usize,
     pub msg: String,
     pub room_id: usize,
 }
@@ -82,7 +83,7 @@ pub struct ClientMessage {
 impl ChatServer {
     pub fn new(room_id: usize) -> ChatServer {
         // default room
-        let pp: HashSet<usize> = HashSet::from([1]);
+        let pp: HashSet<usize> = HashSet::new();
         let mut rooms = HashMap::new();
         rooms.insert(room_id, pp);
 
@@ -186,10 +187,24 @@ impl Handler<Join> for ChatServer {
 
 
 impl Handler<Create> for ChatServer {
-    type Result = ();
+    type Result = usize;
 
     fn handle(&mut self, msg: Create, ctx: &mut Self::Context) -> Self::Result {
-        
+        let room_id = self.rng.gen::<usize>();
+
+        self.sessions.insert(msg.user_id, msg.addr);
+
+        self.rooms.insert(
+            room_id,
+            HashSet::from([msg.user_id]),
+        );
+
+        //self.rooms
+        //    .entry(room_id)
+        //    .or_insert_with(HashSet::new)
+        //    .insert(msg.user_id);
+
+        *self.rooms.keys().last().unwrap()
     }
 }
 
@@ -200,20 +215,23 @@ impl Handler<Create> for ChatServer {
 
 
 impl Handler<GetRooms> for ChatServer {
-    type Result = usize;
+    type Result = String;
 
         
         fn handle(&mut self, msg: GetRooms, ctx: &mut Self::Context) -> Self::Result {
         //msg.addr.send(self.rooms);
-        println!("!!! user asked for rooms");
+        //println!("!!! user asked for rooms");
+        //println!("!!! user asked for rooms {:?} ", self.rooms);
         println!("!!! user asked for rooms {:?} ", self.rooms);
-        println!("!!! user asked for rooms {:?} ", serde_json::to_string(&self.rooms).unwrap());
+        println!("!!! user asked for rooms {:?} ", self.sessions);
+        //println!("!!! user asked for rooms {:?} ", serde_json::to_string(&self.rooms).unwrap());
 
-        self.send_user_message(msg.addr, &serde_json::to_string(&self.rooms).unwrap());
+        //self.send_user_message(msg.addr, &serde_json::to_string(&self.rooms).unwrap());
 
 
         let id = self.rng.gen::<usize>();
-        id
+        //id
+        serde_json::to_string(&self.rooms).unwrap()
     }
 }
 

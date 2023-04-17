@@ -6,7 +6,7 @@
     let created_game_is_private = false
     let created_game_name
     let created_game_password
-
+    export let  hello: string;
 
     let show_create_game_modal = false
     let join_public_game_modal = false
@@ -52,6 +52,7 @@
     <div>
         <img src="../images/purple_uno_img.jpg" alt="dd">
     </div>
+    {hello}dazdaz
 
     <div class='w-full  flex space-x-24 px-24 grow items-center justify-center'>
         <div class='rotate-[10deg] -skew-y-[10deg] w-1/3 p-8 bg-[#28233f] flex items-center justify-center flex-col space-y-4  '>
