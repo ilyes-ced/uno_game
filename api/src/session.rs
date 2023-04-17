@@ -55,16 +55,22 @@ impl Actor for WsChatSession {
     type Context = ws::WebsocketContext<Self>;
 
     fn started(&mut self, ctx: &mut Self::Context) {
+
+
         
         self.id = self.rng.gen::<usize>();
         self.hb(ctx);
         
         println!(" {:?} ", &self.id);
         let addr = ctx.address();
+
+
+
+
+
+
         self.addr
-            .send(server::Connect {
-                id: self.id,
-                room_id: self.room_id,
+            .send(server::GetRooms {
                 addr: addr.recipient(),
             })
             .into_actor(self)
@@ -77,6 +83,28 @@ impl Actor for WsChatSession {
                 fut::ready(())
             })
             .wait(ctx);
+
+
+
+
+
+
+        //self.addr
+        //    .send(server::Connect {
+        //        id: self.id,
+        //        room_id: self.room_id,
+        //        addr: addr.recipient(),
+        //    })
+        //    .into_actor(self)
+        //    .then(|res, act, ctx| {
+        //        match res {
+        //            Ok(res) => act.id = res,
+        //            // something is wrong with chat server
+        //            _ => ctx.stop(),
+        //        }
+        //        fut::ready(())
+        //    })
+        //    .wait(ctx);
     }
 
     //fn stopping(&mut self, _: &mut Self::Context) -> Running {
@@ -108,7 +136,13 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WsChatSession {
                 self.hb = Instant::now();
             }
             ws::Message::Text(text) => {
+        println!("!!! message is sent");
 
+                ctx.text("!!! room name is required");
+                ctx.text("!!! room name is required");
+                ctx.text("!!! room name is required");
+                ctx.text("!!! room name is required");
+                ctx.text(format!("!!! unknown command: {:?} ", text));
             }
             ws::Message::Binary(_) => println!("Unexpected binary"),
             ws::Message::Close(reason) => {

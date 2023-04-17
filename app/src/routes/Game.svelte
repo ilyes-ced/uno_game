@@ -62,14 +62,17 @@
 		}, 1000);
 
         console.log('ggggggggggggggggggggggggggggggggggggggggggggggg')
-        socket = new WebSocket("ws://localhost:8080/ws/0")
+        socket = new WebSocket("ws://localhost:8080/ws/get_games")
         socket.addEventListener("open", ()=> {
             console.log("Opened")
 	    });
 
-        //const interval2 = setInterval(() => {
-        //    socket.send(time)
-		//}, 1000);
+        const interval2 = setInterval(() => {
+            socket.send(time)
+		}, 1000);
+
+        interval2
+        interval
 
         socket.onmessage = (ev) => {
           console.log('Received: ' + ev.data, 'message')

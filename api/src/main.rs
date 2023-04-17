@@ -31,14 +31,13 @@ async fn chat_route(
     req: HttpRequest,
     stream: web::Payload,
     srv: web::Data<Addr<server::ChatServer>>,
-    room_id: web::Path<usize>,
 ) -> Result<HttpResponse, Error> {
     println!("hello there");
     ws::start(
         session::WsChatSession {
             id: 0, //this users_id
             hb: Instant::now(),
-            room_id: room_id.into_inner(),
+            room_id: 0,
             name: None,
             addr: srv.get_ref().clone(),
             rng: rand::thread_rng(),
@@ -47,6 +46,35 @@ async fn chat_route(
         stream,
     )
 }
+
+
+
+
+
+#[get("/get_games")]
+async fn get_games(
+    req: HttpRequest,
+    stream: web::Payload,
+    srv: web::Data<Addr<server::ChatServer>>,
+) -> Result<HttpResponse, Error> {
+    println!("hello there");
+    ws::start(
+        session::WsChatSession {
+            id: 0, //this users_id
+            hb: Instant::now(),
+            room_id: 0,
+            name: None,
+            addr: srv.get_ref().clone(),
+            rng: rand::thread_rng(),
+        },
+        &req,
+        stream,
+    )
+}
+
+
+
+
 
 /// Displays state
 async fn get_count(count: web::Data<AtomicUsize>) -> impl Responder {
@@ -74,6 +102,7 @@ async fn main() -> std::io::Result<()> {
             //.app_data(web::Data::from(users_state.clone()))
             .app_data(web::Data::new(server.clone()))
             .service(chat_route)
+            .service(get_games)
     })
     .workers(2)
     .bind(("127.0.0.1", 8080))?
