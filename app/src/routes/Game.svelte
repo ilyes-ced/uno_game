@@ -63,7 +63,7 @@
                 try {
                   socket.send(
                     JSON.stringify({
-                        msg_type: 'create_room',
+                        msg_type: 'get_rooms',
                         content: "hello"
                     })
                   )
@@ -139,7 +139,7 @@
                   socket.send(
                     JSON.stringify({
                         msg_type: 'card_play',
-                        content: "hello"
+                        content: JSON.stringify(cards_tempo[e.target.id])
                     })
                   )
                 } catch (error) {

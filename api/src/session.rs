@@ -41,7 +41,7 @@ impl WsChatSession {
                 // heartbeat timed out
                 println!("Websocket Client heartbeat failed, disconnecting!");
 
-                act.addr.do_send(server::Disconnect { user_id: act.id, room_id: todo!() });
+                act.addr.do_send(server::Disconnect { user_id: act.id });
 
                 ctx.stop();
 
@@ -105,10 +105,10 @@ impl Actor for WsChatSession {
         //    .wait(ctx);
     }
 
-    //fn stopping(&mut self, _: &mut Self::Context) -> Running {
-    //    self.addr.do_send(server::Disconnect { id: self.id });
-    //    Running::Stop
-    //}
+    fn stopping(&mut self, _: &mut Self::Context) -> Running {
+        self.addr.do_send(server::Disconnect { user_id: self.id });
+        Running::Stop
+    }
 }
 
 
@@ -138,6 +138,12 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WsChatSession {
                 let new_msg: MessageType = serde_json::from_str(&text).unwrap();
                 println!("recieved this////////////////////////////{:?}//////////////// from {:?} ", new_msg, self.id);
 
+                match new_msg.msg_type.as_str() {
+                    ("create_room") => println!("here we create room"),
+                    ("get_rooms") => println!("here we display all rooms and sessions"),
+                    ("card_play") => println!("here we play in our room"),
+                    (_) => println!("error invalid request"),
+                }
 
 
             }

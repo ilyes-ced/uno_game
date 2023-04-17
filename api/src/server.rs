@@ -43,7 +43,6 @@ pub struct Connect {
 #[rtype(result = "()")]
 pub struct Disconnect {
     pub user_id: usize,
-    pub room_id: usize,
 }
 
 #[derive(Message)]
@@ -167,7 +166,17 @@ impl Handler<Disconnect> for ChatServer {
     type Result = ();
 
     fn handle(&mut self, msg: Disconnect, ctx: &mut Self::Context) -> Self::Result {
-        todo!()
+
+        let mut rooms: Vec<usize> = Vec::new();
+
+        if self.sessions.remove(&msg.user_id).is_some() {
+            // remove session from all rooms
+            for (room_id, sessions) in  &mut self.rooms {
+                if sessions.remove(&msg.user_id) {
+                    rooms.push(*room_id);
+                }
+            }
+        }
     }
 }
 
@@ -222,8 +231,8 @@ impl Handler<GetRooms> for ChatServer {
         //msg.addr.send(self.rooms);
         //println!("!!! user asked for rooms");
         //println!("!!! user asked for rooms {:?} ", self.rooms);
-        println!("!!! user asked for rooms {:?} ", self.rooms);
-        println!("!!! user asked for rooms {:?} ", self.sessions);
+        println!(" {:?} ", self.rooms);
+        println!(" {:?} ", self.sessions);
         //println!("!!! user asked for rooms {:?} ", serde_json::to_string(&self.rooms).unwrap());
 
         //self.send_user_message(msg.addr, &serde_json::to_string(&self.rooms).unwrap());
