@@ -24,9 +24,9 @@
         {type: 'change_color', color: 'black', is_blank:true, value:100 },
     ]
 
-    let user1_cards = 10
-    let user2_cards = 4
-    let user3_cards = 3
+    let user1_cards = 8
+    let user2_cards = 8
+    let user3_cards = 8
 
     let offset = 0
 
@@ -173,9 +173,12 @@
 
 
 <div class='  w-full flex items-center justify-between grow'>
-    <div class="absolute ">
-        {hours + ':'+minutes+':'+seconds}
-    </div>
+    <!--
+
+        <div class="absolute ">
+            {hours + ':'+minutes+':'+seconds}
+        </div>
+    -->
 
 
 
@@ -205,9 +208,9 @@
         <div class='w-1/4 h-full  flex items-center justify-center ' >
             <div class=' w-48  h-2/3  flex items-center justify-center'>
                 <div class=' w-48  h-full  flex items-center justify-center '>
-                    <div id='' class='flex relative bg-green-600  h-full w-48 rounded-md outline'   >
+                    <div id='' class='flex relative   h-full w-48 rounded-md outline'   >
                         {#each Array(user1_cards) as _, i}
-                            <div class='absolute transition-all ease-in-out duration-300 -rotate-90  left-1/2 -translate-x-1/2   top-1/2 translate-y-1/2 '   style={"top: calc( "+i+"*( 100% / "+user1_cards+" ) )"} >
+                            <div class='absolute transition-all ease-in-out duration-300 -rotate-90  left-1/2 -translate-x-1/2   top-1/2 translate-y-1/2 '   style={"top: calc( "+i+"*( 100% / "+user1_cards+" - 45px ) )"} >
                                 <Back />
                             </div>	
                         {/each}
@@ -221,7 +224,7 @@
                 <div class='w-full h-full   flex items-end justify-center'>
                     <div id='' class='flex relative  h-48 rounded-md outline   w-full  '  >
                         {#each Array(user2_cards) as _, i}
-                            <div class='absolute transition-all ease-in-out duration-300 top-1/2 -translate-y-1/2  '  style={"left: calc( "+i+"*( 100% / "+user2_cards+" ) )"} >
+                            <div class='absolute transition-all ease-in-out duration-300 top-1/2 -translate-y-1/2  '  style={"left: calc( "+i+"*( 100% / "+user2_cards+"  )  )"} >
                                 <Back />
                             </div>	
                         {/each}
@@ -230,7 +233,7 @@
             </div>
             <!--  CENTER  -->
             <div class='w-full h-full  flex items-center justify-center ' >
-                <div class='w-64 h-48 bg-green-500   rounded-lg flex  outline ' bind:this={center_box}>
+                <div class='w-64 h-48    rounded-lg flex  outline ' bind:this={center_box}>
                     <Back />
                     {#if last_card.type === 'number'}
                         <Number_card number={last_card.value} bg={last_card.color}   />
@@ -250,7 +253,7 @@
                     <div id='' class='flex relative   h-48 rounded-md outline   w-full '  >
                         {#each cards_tempo as card, i}
 							<!-- "+(i*cards_tempo.length)+"%; -->
-                            <div  id={i+''} class='absolute transition-all ease-in-out duration-300  top-1/2 -translate-y-1/2 cursor-pointer' style={"left: calc( "+i+"*( 100% / "+cards_tempo.length+" ) ) "} on:click={test} on:keydown={()=>{console.log('idk why')}} >
+                            <div  id={i+''} class='absolute transition-all ease-in-out duration-300  top-1/2 -translate-y-1/2 cursor-pointer' style={"left: calc( "+i+"*( 100% / "+cards_tempo.length+"  ) ) "} on:click={test} on:keydown={()=>{console.log('idk why')}} >
                                 {#if card.type === 'number'}
                                     <Number_card number={card.value} bg={card.color}   />
                                 {:else if card.type === 'change_direction' || card.type === 'block' || card.type === 'pick_two'}
@@ -270,9 +273,9 @@
         <div class='w-1/4 h-full  flex items-center justify-center ' >
             <div class='w-48 h-2/3  flex items-center justify-center'>
                 <div class='w-48 h-full  flex items-center justify-center '>
-                    <div id='' class='flex relative bg-green-600 w-48 h-full outline rounded-md ' >
+                    <div id='' class='flex relative  w-48 h-full outline rounded-md ' >
                         {#each Array(user3_cards) as _, i}
-                            <div class='absolute transition-all ease-in-out duration-300 rotate-90  left-1/2 -translate-x-1/2    top-1/2 translate-y-1/2  '   style={"top: calc( "+i+"*( 100% / "+user3_cards+" ) )"} >
+                            <div class='absolute transition-all ease-in-out duration-300 rotate-90  left-1/2 -translate-x-1/2    top-1/2 translate-y-1/2  '   style={"top: calc( "+i+"*( 100% / "+user3_cards+" - 45px )  )"} >
                                 <Back />
                             </div>	
                         {/each}
